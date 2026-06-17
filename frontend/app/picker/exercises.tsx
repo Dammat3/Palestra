@@ -86,6 +86,7 @@ export default function ExercisePicker() {
       exerciseName: e.name,
       muscleGroup: e.muscle_group,
       image: e.image,
+      images: e.images || (e.image ? [e.image] : []),
       targetSets: prefs.defaultSets,
       targetReps: prefs.defaultReps,
       targetWeight: 0,

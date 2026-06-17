@@ -221,7 +221,7 @@ EXERCISES = [
             "Abbassa controllato."
         ],
         "tips": "Schiena parallela al pavimento, non ruotare il busto.",
-        "images": [img("Bent_Over_Dumbbell_Row", 0), img("Bent_Over_Dumbbell_Row", 1)],
+        "images": [img("One-Arm_Dumbbell_Row", 0), img("One-Arm_Dumbbell_Row", 1)],
     },
     {
         "id": "pulley-basso",
@@ -255,7 +255,7 @@ EXERCISES = [
             "Riporta il manubrio sopra il petto contraendo il dorso."
         ],
         "tips": "Non scendere troppo, ferma il movimento quando senti tirare le spalle.",
-        "images": [img("Dumbbell_Pullover", 0), img("Dumbbell_Pullover", 1)],
+        "images": [img("Bent-Arm_Dumbbell_Pullover", 0), img("Bent-Arm_Dumbbell_Pullover", 1)],
     },
 
     # ============ GAMBE ============
@@ -587,7 +587,7 @@ EXERCISES = [
             "Estendi controllato."
         ],
         "tips": "I cavi mantengono tensione costante.",
-        "images": [img("Cable_Curl", 0), img("Cable_Curl", 1)],
+        "images": [img("High_Cable_Curls", 0), img("High_Cable_Curls", 1)],
     },
 
     # ============ TRICIPITI ============
@@ -777,7 +777,7 @@ EXERCISES = [
             "Salta verso l'alto con le braccia tese."
         ],
         "tips": "Mantieni un ritmo costante.",
-        "images": [img("Burpee", 0), img("Burpee", 1)],
+        "images": [img("Mountain_Climbers", 0), img("Mountain_Climbers", 1)],
     },
     {
         "id": "jumping-jack",
@@ -794,7 +794,7 @@ EXERCISES = [
             "Ripeti a ritmo sostenuto."
         ],
         "tips": "Atterra morbidamente sulle punte.",
-        "images": [img("Jumping_Jacks", 0), img("Jumping_Jacks", 1)],
+        "images": [img("Knee_Tuck_Jump", 0), img("Knee_Tuck_Jump", 1)],
     },
     {
         "id": "corsa-tapis",
@@ -828,7 +828,958 @@ EXERCISES = [
             "Varia velocità e resistenza per migliorare l'allenamento."
         ],
         "tips": "Ottimo per il riscaldamento o per HIIT.",
-        "images": [img("Stationary_Bike", 0), img("Stationary_Bike", 1)],
+        "images": [img("Bicycling_Stationary", 0), img("Bicycling_Stationary", 1)],
+    },
+
+    # ============ PETTO (extra) ============
+    {
+        "id": "panca-inclinata-bilanciere",
+        "name": "Panca Inclinata con Bilanciere",
+        "category": "Forza",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Spalle", "Tricipiti"],
+        "equipment": "Bilanciere",
+        "level": "Intermedio",
+        "instructions": [
+            "Regola la panca a 30-45 gradi di inclinazione.",
+            "Sdraiati e impugna il bilanciere poco più largo delle spalle.",
+            "Abbassa il bilanciere verso la parte alta del petto.",
+            "Spingi verso l'alto fino all'estensione completa."
+        ],
+        "tips": "Inclinazioni troppo alte coinvolgono più le spalle che il petto.",
+        "images": [img("Barbell_Incline_Bench_Press_-_Medium_Grip", 0), img("Barbell_Incline_Bench_Press_-_Medium_Grip", 1)],
+    },
+    {
+        "id": "croci-manubri-piana",
+        "name": "Croci Panca Piana con Manubri",
+        "category": "Isolamento",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Spalle"],
+        "equipment": "Manubri",
+        "level": "Principiante",
+        "instructions": [
+            "Sdraiati sulla panca piana con un manubrio in ciascuna mano sopra il petto.",
+            "Mantieni i gomiti leggermente piegati e fissi.",
+            "Apri lateralmente le braccia ad arco fino a sentire l'allungamento del petto.",
+            "Risali contraendo il petto al centro."
+        ],
+        "tips": "Movimento ad arco, non a spinta. Niente piegamento dei gomiti.",
+        "images": [img("Dumbbell_Flyes", 0), img("Dumbbell_Flyes", 1)],
+    },
+    {
+        "id": "croci-inclinate-manubri",
+        "name": "Croci Inclinate con Manubri",
+        "category": "Isolamento",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Spalle"],
+        "equipment": "Manubri",
+        "level": "Intermedio",
+        "instructions": [
+            "Regola la panca a 30 gradi.",
+            "Manubri sopra il petto, gomiti leggermente piegati.",
+            "Apri le braccia ad arco lateralmente.",
+            "Contrai il petto risalendo."
+        ],
+        "tips": "Ottimo per la parte alta del petto.",
+        "images": [img("Incline_Dumbbell_Flyes", 0), img("Incline_Dumbbell_Flyes", 1)],
+    },
+    {
+        "id": "chest-press-machine",
+        "name": "Chest Press alla Macchina",
+        "category": "Forza",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Tricipiti", "Spalle"],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Regola la seduta in modo che le impugnature siano all'altezza del petto.",
+            "Spingi le impugnature in avanti fino all'estensione completa.",
+            "Ritorna controllato senza far toccare i pesi."
+        ],
+        "tips": "Mantieni le scapole retratte sullo schienale.",
+        "images": [img("Machine_Bench_Press", 0), img("Machine_Bench_Press", 1)],
+    },
+    {
+        "id": "cable-chest-press",
+        "name": "Cable Chest Press",
+        "category": "Forza",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Tricipiti", "Spalle"],
+        "equipment": "Cavi",
+        "level": "Intermedio",
+        "instructions": [
+            "Imposta i cavi all'altezza del petto.",
+            "Un passo avanti rispetto ai cavi, presa neutra.",
+            "Spingi le impugnature in avanti fino a unirle.",
+            "Ritorna lentamente."
+        ],
+        "tips": "Tensione costante dei cavi rispetto al bilanciere.",
+        "images": [img("Cable_Chest_Press", 0), img("Cable_Chest_Press", 1)],
+    },
+    {
+        "id": "incline-cable-flye",
+        "name": "Croci ai Cavi Inclinate",
+        "category": "Isolamento",
+        "muscle_group": "Petto",
+        "secondary_muscles": [],
+        "equipment": "Cavi",
+        "level": "Intermedio",
+        "instructions": [
+            "Posiziona una panca inclinata tra due cavi bassi.",
+            "Afferra le impugnature, braccia aperte e gomiti leggermente piegati.",
+            "Porta le braccia ad arco verso l'alto unendole sopra il petto.",
+            "Ritorna lentamente."
+        ],
+        "tips": "Focus sulla parte alta del pettorale.",
+        "images": [img("Incline_Cable_Flye", 0), img("Incline_Cable_Flye", 1)],
+    },
+    {
+        "id": "piegamenti-stretti",
+        "name": "Piegamenti Presa Stretta",
+        "category": "Corpo Libero",
+        "muscle_group": "Petto",
+        "secondary_muscles": ["Tricipiti"],
+        "equipment": "Corpo libero",
+        "level": "Intermedio",
+        "instructions": [
+            "Posizionati in plank con le mani sotto le spalle.",
+            "Mani vicine, indici e pollici che si toccano (diamante).",
+            "Abbassati piegando i gomiti vicino al corpo.",
+            "Spingi verso l'alto."
+        ],
+        "tips": "Coinvolge molto i tricipiti.",
+        "images": [img("Incline_Push-Up_Close-Grip", 0), img("Incline_Push-Up_Close-Grip", 1)],
+    },
+
+    # ============ DORSO (extra) ============
+    {
+        "id": "chin-up",
+        "name": "Chin-up (Trazioni Presa Supina)",
+        "category": "Corpo Libero",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Bicipiti"],
+        "equipment": "Sbarra",
+        "level": "Intermedio",
+        "instructions": [
+            "Afferra la sbarra con presa supina, mani alla larghezza delle spalle.",
+            "Parti con le braccia distese.",
+            "Tirati su fino a portare il mento sopra la sbarra.",
+            "Scendi controllato."
+        ],
+        "tips": "Coinvolge di più i bicipiti rispetto alla trazione prona.",
+        "images": [img("Chin-Up", 0), img("Chin-Up", 1)],
+    },
+    {
+        "id": "lat-machine-presa-stretta",
+        "name": "Lat Machine Presa Stretta",
+        "category": "Forza",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Bicipiti"],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Aggancia un'impugnatura a V o stretta alla lat machine.",
+            "Siediti e blocca le gambe.",
+            "Tira l'impugnatura al petto, gomiti vicini al corpo.",
+            "Risali controllato."
+        ],
+        "tips": "Maggiore enfasi sulla parte centrale del dorso.",
+        "images": [img("Close-Grip_Front_Lat_Pulldown", 0), img("Close-Grip_Front_Lat_Pulldown", 1)],
+    },
+    {
+        "id": "t-bar-row",
+        "name": "T-Bar Row",
+        "category": "Forza",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Bicipiti"],
+        "equipment": "Bilanciere",
+        "level": "Intermedio",
+        "instructions": [
+            "Posizionati a cavallo del bilanciere ancorato.",
+            "Piega le ginocchia e inclinati in avanti, schiena dritta.",
+            "Afferra l'impugnatura a V e tira verso il petto.",
+            "Abbassa controllato."
+        ],
+        "tips": "Ottimo per lo spessore del dorso.",
+        "images": [img("Lying_T-Bar_Row", 0), img("Lying_T-Bar_Row", 1)],
+    },
+    {
+        "id": "rematore-un-braccio",
+        "name": "Rematore con Manubrio a un Braccio",
+        "category": "Forza",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Bicipiti"],
+        "equipment": "Manubrio",
+        "level": "Principiante",
+        "instructions": [
+            "Appoggia ginocchio e mano sulla panca.",
+            "Manubrio nell'altra mano, braccio disteso.",
+            "Tira il manubrio verso il fianco, gomito vicino al busto.",
+            "Estendi controllato."
+        ],
+        "tips": "Non ruotare il busto durante il movimento.",
+        "images": [img("One-Arm_Dumbbell_Row", 0), img("One-Arm_Dumbbell_Row", 1)],
+    },
+    {
+        "id": "face-pull",
+        "name": "Face Pull",
+        "category": "Isolamento",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Spalle"],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Imposta la corda a un cavo alto.",
+            "Afferra le estremità della corda con presa neutra.",
+            "Tira la corda verso il viso, gomiti alti.",
+            "Stringi le scapole e ruota le spalle esternamente."
+        ],
+        "tips": "Eccellente per la salute delle spalle e la postura.",
+        "images": [img("Face_Pull", 0), img("Face_Pull", 1)],
+    },
+    {
+        "id": "hyperextension",
+        "name": "Hyperextension (Iperestensione)",
+        "category": "Isolamento",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Glutei", "Femorali"],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Posizionati sulla panca con i piedi bloccati e anche appoggiate.",
+            "Piegati in avanti mantenendo la schiena dritta.",
+            "Risali contraendo lombari, glutei e femorali.",
+            "Non iperestendere la schiena in cima."
+        ],
+        "tips": "Movimento controllato, mai a strappi.",
+        "images": [img("Hyperextensions_Back_Extensions", 0), img("Hyperextensions_Back_Extensions", 1)],
+    },
+    {
+        "id": "good-morning",
+        "name": "Good Morning",
+        "category": "Forza",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Femorali", "Glutei"],
+        "equipment": "Bilanciere",
+        "level": "Avanzato",
+        "instructions": [
+            "Posiziona il bilanciere sui trapezi alti.",
+            "Piedi alla larghezza delle anche, ginocchia leggermente piegate.",
+            "Spingi i glutei indietro abbassando il busto in avanti.",
+            "Risali contraendo lombari e glutei."
+        ],
+        "tips": "Mantieni la schiena rigorosamente neutra. Usa carichi moderati.",
+        "images": [img("Good_Morning", 0), img("Good_Morning", 1)],
+    },
+    {
+        "id": "rematore-inverso",
+        "name": "Rematore Inverso (Inverted Row)",
+        "category": "Corpo Libero",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Bicipiti"],
+        "equipment": "Sbarra bassa",
+        "level": "Principiante",
+        "instructions": [
+            "Posiziona una sbarra all'altezza dei fianchi.",
+            "Sdraiati sotto la sbarra, afferra con presa prona.",
+            "Corpo dritto, talloni a terra.",
+            "Tirati verso la sbarra portando il petto a sfiorarla.",
+            "Scendi controllato."
+        ],
+        "tips": "Ottima alternativa alle trazioni per principianti.",
+        "images": [img("Inverted_Row", 0), img("Inverted_Row", 1)],
+    },
+    {
+        "id": "scrollate-bilanciere",
+        "name": "Scrollate con Bilanciere",
+        "category": "Isolamento",
+        "muscle_group": "Dorso",
+        "secondary_muscles": ["Trapezi"],
+        "equipment": "Bilanciere",
+        "level": "Principiante",
+        "instructions": [
+            "In piedi con bilanciere a presa prona, mani larghe come le spalle.",
+            "Solleva le spalle verso le orecchie senza piegare i gomiti.",
+            "Tieni un secondo in contrazione.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Movimento solo verticale, niente rotazioni.",
+        "images": [img("Barbell_Shrug", 0), img("Barbell_Shrug", 1)],
+    },
+
+    # ============ GAMBE / GLUTEI (extra) ============
+    {
+        "id": "front-squat",
+        "name": "Front Squat",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei", "Core"],
+        "equipment": "Bilanciere",
+        "level": "Avanzato",
+        "instructions": [
+            "Posiziona il bilanciere sulle clavicole, gomiti in alto.",
+            "Piedi alla larghezza delle spalle.",
+            "Scendi mantenendo il busto eretto.",
+            "Risali spingendo coi talloni."
+        ],
+        "tips": "Maggiore enfasi sui quadricipiti rispetto allo squat tradizionale.",
+        "images": [img("Front_Barbell_Squat", 0), img("Front_Barbell_Squat", 1)],
+    },
+    {
+        "id": "hack-squat",
+        "name": "Hack Squat",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei"],
+        "equipment": "Macchinario",
+        "level": "Intermedio",
+        "instructions": [
+            "Posizionati alla macchina con schiena e spalle appoggiate.",
+            "Piedi al centro della pedana.",
+            "Sblocca i fermi e scendi flettendo le ginocchia.",
+            "Spingi verso l'alto."
+        ],
+        "tips": "Riduce il carico sulla zona lombare.",
+        "images": [img("Hack_Squat", 0), img("Hack_Squat", 1)],
+    },
+    {
+        "id": "goblet-squat",
+        "name": "Goblet Squat",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei", "Core"],
+        "equipment": "Manubrio",
+        "level": "Principiante",
+        "instructions": [
+            "Tieni un manubrio in verticale davanti al petto con entrambe le mani.",
+            "Piedi alla larghezza delle spalle.",
+            "Scendi in squat profondo mantenendo il busto eretto.",
+            "Risali spingendo coi talloni."
+        ],
+        "tips": "Ottimo per imparare la tecnica dello squat.",
+        "images": [img("Goblet_Squat", 0), img("Goblet_Squat", 1)],
+    },
+    {
+        "id": "bulgarian-split-squat",
+        "name": "Bulgarian Split Squat",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei"],
+        "equipment": "Manubri",
+        "level": "Intermedio",
+        "instructions": [
+            "Appoggia la parte alta del piede posteriore su una panca.",
+            "Un manubrio per mano lungo i fianchi.",
+            "Scendi flettendo la gamba anteriore fino a 90 gradi.",
+            "Risali col tallone anteriore."
+        ],
+        "tips": "Il ginocchio anteriore non deve superare la punta del piede.",
+        "images": [img("Barbell_Side_Split_Squat", 0), img("Barbell_Side_Split_Squat", 1)],
+    },
+    {
+        "id": "affondi-bilanciere",
+        "name": "Affondi con Bilanciere",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei", "Core"],
+        "equipment": "Bilanciere",
+        "level": "Intermedio",
+        "instructions": [
+            "Posiziona il bilanciere sui trapezi.",
+            "Fai un ampio passo in avanti.",
+            "Abbassa il ginocchio posteriore verso il suolo.",
+            "Spingi col tallone anteriore per tornare in piedi."
+        ],
+        "tips": "Mantieni il busto eretto durante tutto il movimento.",
+        "images": [img("Barbell_Lunge", 0), img("Barbell_Lunge", 1)],
+    },
+    {
+        "id": "walking-lunge",
+        "name": "Walking Lunge",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei"],
+        "equipment": "Bilanciere",
+        "level": "Intermedio",
+        "instructions": [
+            "Bilanciere sui trapezi o manubri lungo i fianchi.",
+            "Esegui un affondo in avanti.",
+            "Spingi col tallone anteriore e fai un passo avanti con l'altra gamba.",
+            "Continua alternando le gambe camminando."
+        ],
+        "tips": "Mantieni un ritmo costante e controlla bene l'equilibrio.",
+        "images": [img("Barbell_Walking_Lunge", 0), img("Barbell_Walking_Lunge", 1)],
+    },
+    {
+        "id": "step-up",
+        "name": "Step-Up con Manubri",
+        "category": "Forza",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei"],
+        "equipment": "Manubri",
+        "level": "Principiante",
+        "instructions": [
+            "In piedi davanti a una panca o un gradino, manubri ai fianchi.",
+            "Sali con un piede sulla panca.",
+            "Spingi col tallone fino in cima.",
+            "Scendi controllato con l'altra gamba e alterna."
+        ],
+        "tips": "Concentra la spinta sul tallone, non sul piede in basso.",
+        "images": [img("Dumbbell_Step_Ups", 0), img("Dumbbell_Step_Ups", 1)],
+    },
+    {
+        "id": "leg-curl-seduto",
+        "name": "Leg Curl Seduto",
+        "category": "Isolamento",
+        "muscle_group": "Gambe",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti alla macchina con il rullo sopra le caviglie.",
+            "Fletti le ginocchia portando il rullo verso il basso.",
+            "Distendi lentamente."
+        ],
+        "tips": "Variante più sicura per la zona lombare rispetto al curl sdraiato.",
+        "images": [img("Ball_Leg_Curl", 0), img("Ball_Leg_Curl", 1)],
+    },
+    {
+        "id": "calf-seduto",
+        "name": "Calf Seduto",
+        "category": "Isolamento",
+        "muscle_group": "Polpacci",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti alla macchina con le ginocchia sotto i pad.",
+            "Punte dei piedi sulla pedana.",
+            "Solleva i talloni il più possibile.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Mira al soleo (parte profonda del polpaccio).",
+        "images": [img("Barbell_Seated_Calf_Raise", 0), img("Barbell_Seated_Calf_Raise", 1)],
+    },
+    {
+        "id": "donkey-calf",
+        "name": "Donkey Calf Raise",
+        "category": "Isolamento",
+        "muscle_group": "Polpacci",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Intermedio",
+        "instructions": [
+            "Posizionati alla macchina con busto piegato in avanti.",
+            "Punte sulla pedana, talloni nel vuoto.",
+            "Solleva i talloni in alto contraendo i polpacci.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Movimento completo per massimo stretching.",
+        "images": [img("Donkey_Calf_Raises", 0), img("Donkey_Calf_Raises", 1)],
+    },
+    {
+        "id": "glute-kickback",
+        "name": "Glute Kickback ai Cavi",
+        "category": "Isolamento",
+        "muscle_group": "Glutei",
+        "secondary_muscles": ["Femorali"],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Aggancia una cavigliera al cavo basso.",
+            "Posizionati di fronte alla macchina, leggermente piegato in avanti.",
+            "Spingi indietro la gamba contraendo il gluteo.",
+            "Ritorna controllato."
+        ],
+        "tips": "Movimento isolato, contrai bene il gluteo.",
+        "images": [img("Glute_Kickback", 0), img("Glute_Kickback", 1)],
+    },
+    {
+        "id": "adduttori-macchina",
+        "name": "Adduttori alla Macchina",
+        "category": "Isolamento",
+        "muscle_group": "Gambe",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti alla macchina degli adduttori.",
+            "Posiziona le cosce contro i pad interni.",
+            "Stringi le gambe vincendo la resistenza.",
+            "Apri lentamente controllando il peso."
+        ],
+        "tips": "Isola la parte interna delle cosce.",
+        "images": [img("Adductor", 0), img("Adductor", 1)],
+    },
+
+    # ============ SPALLE (extra) ============
+    {
+        "id": "arnold-press",
+        "name": "Arnold Press",
+        "category": "Forza",
+        "muscle_group": "Spalle",
+        "secondary_muscles": ["Tricipiti"],
+        "equipment": "Manubri",
+        "level": "Intermedio",
+        "instructions": [
+            "Siediti con un manubrio in ciascuna mano davanti al petto, palmi rivolti verso di te.",
+            "Spingi i manubri verso l'alto ruotando i polsi.",
+            "In cima i palmi sono rivolti in avanti.",
+            "Abbassa invertendo il movimento."
+        ],
+        "tips": "Coinvolge tutti i fasci del deltoide.",
+        "images": [img("Arnold_Dumbbell_Press", 0), img("Arnold_Dumbbell_Press", 1)],
+    },
+    {
+        "id": "shoulder-press-macchina",
+        "name": "Shoulder Press alla Macchina",
+        "category": "Forza",
+        "muscle_group": "Spalle",
+        "secondary_muscles": ["Tricipiti"],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti regolando l'altezza in modo che le impugnature siano all'altezza delle spalle.",
+            "Spingi verso l'alto fino all'estensione completa.",
+            "Abbassa controllato."
+        ],
+        "tips": "Ottimo per principianti, traiettoria guidata.",
+        "images": [img("Machine_Shoulder_Military_Press", 0), img("Machine_Shoulder_Military_Press", 1)],
+    },
+    {
+        "id": "cuban-press",
+        "name": "Cuban Press",
+        "category": "Isolamento",
+        "muscle_group": "Spalle",
+        "secondary_muscles": ["Trapezi"],
+        "equipment": "Manubri",
+        "level": "Intermedio",
+        "instructions": [
+            "Manubri ai fianchi, palmi verso il corpo.",
+            "Solleva i gomiti lateralmente come un rematore alto.",
+            "Ruota gli avambracci verso l'alto.",
+            "Spingi i manubri sopra la testa.",
+            "Inverti il movimento."
+        ],
+        "tips": "Eccellente per la mobilità delle spalle e i rotatori.",
+        "images": [img("Cuban_Press", 0), img("Cuban_Press", 1)],
+    },
+    {
+        "id": "upright-row",
+        "name": "Tirate al Mento (Upright Row)",
+        "category": "Isolamento",
+        "muscle_group": "Spalle",
+        "secondary_muscles": ["Trapezi"],
+        "equipment": "Manubri",
+        "level": "Principiante",
+        "instructions": [
+            "In piedi con manubri davanti alle cosce, presa prona.",
+            "Tira i manubri verso il mento sollevando i gomiti.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Non salire troppo: ferma a livello del petto per evitare impingement.",
+        "images": [img("Dumbbell_One-Arm_Upright_Row", 0), img("Dumbbell_One-Arm_Upright_Row", 1)],
+    },
+
+    # ============ BICIPITI (extra) ============
+    {
+        "id": "drag-curl",
+        "name": "Drag Curl",
+        "category": "Isolamento",
+        "muscle_group": "Bicipiti",
+        "secondary_muscles": [],
+        "equipment": "Bilanciere",
+        "level": "Intermedio",
+        "instructions": [
+            "Bilanciere a presa supina lungo le cosce.",
+            "Tira il bilanciere verso l'alto trascinandolo sul corpo.",
+            "I gomiti vanno indietro durante il movimento.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Maggiore enfasi sul capo lungo del bicipite.",
+        "images": [img("Drag_Curl", 0), img("Drag_Curl", 1)],
+    },
+    {
+        "id": "concentration-curl",
+        "name": "Concentration Curl",
+        "category": "Isolamento",
+        "muscle_group": "Bicipiti",
+        "secondary_muscles": [],
+        "equipment": "Manubrio",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti sulla panca con le gambe divaricate.",
+            "Appoggia il gomito sull'interno della coscia.",
+            "Manubrio nella mano, fletti il braccio.",
+            "Estendi controllato."
+        ],
+        "tips": "Movimento isolato per il picco del bicipite.",
+        "images": [img("Concentration_Curls", 0), img("Concentration_Curls", 1)],
+    },
+    {
+        "id": "curl-ez-bar",
+        "name": "Curl con Bilanciere EZ",
+        "category": "Isolamento",
+        "muscle_group": "Bicipiti",
+        "secondary_muscles": ["Avambracci"],
+        "equipment": "Bilanciere EZ",
+        "level": "Principiante",
+        "instructions": [
+            "In piedi con bilanciere EZ a presa supina.",
+            "Gomiti aderenti al busto.",
+            "Fletti le braccia portando il bilanciere alle spalle.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Più confortevole per i polsi rispetto al bilanciere dritto.",
+        "images": [img("EZ-Bar_Curl", 0), img("EZ-Bar_Curl", 1)],
+    },
+    {
+        "id": "curl-inclinato",
+        "name": "Curl Inclinato con Manubri",
+        "category": "Isolamento",
+        "muscle_group": "Bicipiti",
+        "secondary_muscles": [],
+        "equipment": "Manubri",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti su una panca inclinata a 45-60 gradi.",
+            "Manubri lungo i fianchi, palmi in avanti.",
+            "Fletti le braccia portando i manubri alle spalle.",
+            "Estendi controllato fino al pieno allungamento."
+        ],
+        "tips": "Massima allungamento del capo lungo del bicipite.",
+        "images": [img("Incline_Dumbbell_Curl", 0), img("Incline_Dumbbell_Curl", 1)],
+    },
+    {
+        "id": "machine-curl",
+        "name": "Curl alla Macchina",
+        "category": "Isolamento",
+        "muscle_group": "Bicipiti",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti alla macchina con le braccia sui pad.",
+            "Afferra le impugnature.",
+            "Fletti le braccia contraendo i bicipiti.",
+            "Estendi controllato."
+        ],
+        "tips": "Movimento guidato, ottimo per il finishing.",
+        "images": [img("Machine_Bicep_Curl", 0), img("Machine_Bicep_Curl", 1)],
+    },
+
+    # ============ TRICIPITI (extra) ============
+    {
+        "id": "tricep-overhead",
+        "name": "Tricipiti Overhead con Corda",
+        "category": "Isolamento",
+        "muscle_group": "Tricipiti",
+        "secondary_muscles": [],
+        "equipment": "Cavi",
+        "level": "Intermedio",
+        "instructions": [
+            "Aggancia una corda al cavo basso e dai le spalle alla macchina.",
+            "Afferra la corda dietro la testa, gomiti in alto.",
+            "Estendi le braccia sopra la testa.",
+            "Ritorna piegando solo gli avambracci."
+        ],
+        "tips": "Eccellente per il capo lungo del tricipite.",
+        "images": [img("Cable_Rope_Overhead_Triceps_Extension", 0), img("Cable_Rope_Overhead_Triceps_Extension", 1)],
+    },
+    {
+        "id": "tricep-incline",
+        "name": "French Press su Panca Inclinata",
+        "category": "Isolamento",
+        "muscle_group": "Tricipiti",
+        "secondary_muscles": [],
+        "equipment": "Bilanciere EZ",
+        "level": "Intermedio",
+        "instructions": [
+            "Sdraiati su una panca inclinata a 30 gradi.",
+            "Bilanciere EZ con presa stretta sopra il petto.",
+            "Mantieni i gomiti fermi, abbassa il bilanciere dietro la testa.",
+            "Estendi tornando alla posizione iniziale."
+        ],
+        "tips": "I gomiti restano fissi, si muove solo l'avambraccio.",
+        "images": [img("Incline_Barbell_Triceps_Extension", 0), img("Incline_Barbell_Triceps_Extension", 1)],
+    },
+    {
+        "id": "tricep-one-arm",
+        "name": "Tricipiti un Braccio al Cavo",
+        "category": "Isolamento",
+        "muscle_group": "Tricipiti",
+        "secondary_muscles": [],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Cavo alto, presa supina con una mano.",
+            "Gomito aderente al busto.",
+            "Estendi il braccio verso il basso.",
+            "Ritorna controllato."
+        ],
+        "tips": "Lavora un braccio alla volta per simmetria.",
+        "images": [img("Cable_One_Arm_Tricep_Extension", 0), img("Cable_One_Arm_Tricep_Extension", 1)],
+    },
+    {
+        "id": "jm-press",
+        "name": "JM Press",
+        "category": "Forza",
+        "muscle_group": "Tricipiti",
+        "secondary_muscles": ["Petto"],
+        "equipment": "Bilanciere",
+        "level": "Avanzato",
+        "instructions": [
+            "Sdraiati sulla panca piana con bilanciere presa stretta.",
+            "Parti col bilanciere sopra il petto.",
+            "Abbassa il bilanciere verso il collo piegando gomiti.",
+            "Spingi tornando in posizione."
+        ],
+        "tips": "Ibrido tra panca stretta e french press. Usa carichi moderati.",
+        "images": [img("JM_Press", 0), img("JM_Press", 1)],
+    },
+    {
+        "id": "tricep-machine",
+        "name": "Tricipiti alla Macchina",
+        "category": "Isolamento",
+        "muscle_group": "Tricipiti",
+        "secondary_muscles": [],
+        "equipment": "Macchinario",
+        "level": "Principiante",
+        "instructions": [
+            "Siediti alla macchina con le braccia sui pad.",
+            "Estendi le braccia verso il basso.",
+            "Ritorna controllato."
+        ],
+        "tips": "Movimento guidato, ottimo per principianti.",
+        "images": [img("Machine_Triceps_Extension", 0), img("Machine_Triceps_Extension", 1)],
+    },
+
+    # ============ ADDOME (extra) ============
+    {
+        "id": "hanging-leg-raise",
+        "name": "Hanging Leg Raise",
+        "category": "Corpo Libero",
+        "muscle_group": "Addome",
+        "secondary_muscles": [],
+        "equipment": "Sbarra",
+        "level": "Avanzato",
+        "instructions": [
+            "Appendi alla sbarra a braccia tese.",
+            "Mantieni il core contratto.",
+            "Solleva le gambe fino a 90 gradi mantenendole dritte (o piegate).",
+            "Abbassa controllato senza dondolare."
+        ],
+        "tips": "Per principianti: piega le ginocchia. Avanzato: gambe tese.",
+        "images": [img("Hanging_Leg_Raise", 0), img("Hanging_Leg_Raise", 1)],
+    },
+    {
+        "id": "cable-crunch",
+        "name": "Crunch ai Cavi",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": [],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Inginocchiati di fronte al cavo alto con una corda.",
+            "Afferra la corda dietro la testa.",
+            "Contrai l'addome arrotolando il busto verso le ginocchia.",
+            "Ritorna controllato."
+        ],
+        "tips": "Il movimento parte dall'addome, non dalle braccia.",
+        "images": [img("Cable_Crunch", 0), img("Cable_Crunch", 1)],
+    },
+    {
+        "id": "ab-roller",
+        "name": "Ab Roller (Rullo Addominali)",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": ["Core", "Spalle"],
+        "equipment": "Ab Roller",
+        "level": "Avanzato",
+        "instructions": [
+            "Inginocchiati con le mani sull'ab roller.",
+            "Rolla in avanti estendendo il corpo, mantenendo il core attivo.",
+            "Vai più lontano possibile senza inarcare la schiena.",
+            "Torna indietro contraendo l'addome."
+        ],
+        "tips": "Inizia con escursioni brevi e aumenta gradualmente.",
+        "images": [img("Ab_Roller", 0), img("Ab_Roller", 1)],
+    },
+    {
+        "id": "bicycle-crunch",
+        "name": "Bicycle Crunch",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": ["Obliqui"],
+        "equipment": "Corpo libero",
+        "level": "Principiante",
+        "instructions": [
+            "Sdraiati a terra con le mani dietro la testa.",
+            "Solleva spalle e gambe da terra.",
+            "Porta il gomito destro al ginocchio sinistro estendendo l'altra gamba.",
+            "Alterna i lati come pedalando."
+        ],
+        "tips": "Movimento controllato, non frenetico.",
+        "images": [img("Air_Bike", 0), img("Air_Bike", 1)],
+    },
+    {
+        "id": "sit-up",
+        "name": "Sit-Up Completo",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": [],
+        "equipment": "Corpo libero",
+        "level": "Principiante",
+        "instructions": [
+            "Sdraiati con ginocchia piegate, piedi a terra.",
+            "Braccia incrociate sul petto o dietro la testa.",
+            "Solleva il busto fino alle ginocchia.",
+            "Scendi controllato."
+        ],
+        "tips": "Mantieni il movimento controllato, non a strappi.",
+        "images": [img("3_4_Sit-Up", 0), img("3_4_Sit-Up", 1)],
+    },
+    {
+        "id": "decline-crunch",
+        "name": "Crunch su Panca Declinata",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": [],
+        "equipment": "Panca",
+        "level": "Intermedio",
+        "instructions": [
+            "Aggancia i piedi sulla panca declinata.",
+            "Braccia incrociate sul petto.",
+            "Solleva il busto contraendo l'addome.",
+            "Scendi controllato."
+        ],
+        "tips": "Maggiore resistenza rispetto al crunch a terra.",
+        "images": [img("Decline_Crunch", 0), img("Decline_Crunch", 1)],
+    },
+    {
+        "id": "oblique-crunch",
+        "name": "Crunch Obliqui",
+        "category": "Isolamento",
+        "muscle_group": "Addome",
+        "secondary_muscles": ["Obliqui"],
+        "equipment": "Corpo libero",
+        "level": "Principiante",
+        "instructions": [
+            "Sdraiati a terra, ginocchia piegate da un lato.",
+            "Mani dietro la testa.",
+            "Solleva il busto ruotando verso il ginocchio.",
+            "Scendi e ripeti."
+        ],
+        "tips": "Cambia lato a metà serie.",
+        "images": [img("Oblique_Crunches", 0), img("Oblique_Crunches", 1)],
+    },
+
+    # ============ FULL BODY / FUNZIONALE ============
+    {
+        "id": "kettlebell-thruster",
+        "name": "Kettlebell Thruster",
+        "category": "Funzionale",
+        "muscle_group": "Cardio",
+        "secondary_muscles": ["Gambe", "Spalle"],
+        "equipment": "Kettlebell",
+        "level": "Intermedio",
+        "instructions": [
+            "Tieni due kettlebell in posizione di rack (spalle).",
+            "Esegui uno squat profondo.",
+            "Risali e spingi i kettlebell sopra la testa in un solo movimento.",
+            "Riportali in posizione di rack e ripeti."
+        ],
+        "tips": "Movimento esplosivo, ottimo per HIIT.",
+        "images": [img("Kettlebell_Thruster", 0), img("Kettlebell_Thruster", 1)],
+    },
+    {
+        "id": "kettlebell-swing",
+        "name": "Kettlebell Swing",
+        "category": "Funzionale",
+        "muscle_group": "Glutei",
+        "secondary_muscles": ["Femorali", "Core", "Cardio"],
+        "equipment": "Kettlebell",
+        "level": "Intermedio",
+        "instructions": [
+            "In piedi con kettlebell tra i piedi.",
+            "Schiena dritta, spingi i glutei indietro afferrando il kettlebell.",
+            "Spingi le anche in avanti facendo oscillare il kettlebell all'altezza delle spalle.",
+            "Lascia che ritorni tra le gambe e ripeti."
+        ],
+        "tips": "Il movimento è hip-driven, non un sollevamento di braccia.",
+        "images": [img("One-Arm_Kettlebell_Swings", 0), img("One-Arm_Kettlebell_Swings", 1)],
+    },
+    {
+        "id": "farmer-walk",
+        "name": "Farmer's Walk",
+        "category": "Funzionale",
+        "muscle_group": "Cardio",
+        "secondary_muscles": ["Trapezi", "Avambracci", "Core"],
+        "equipment": "Manubri",
+        "level": "Principiante",
+        "instructions": [
+            "Afferra due manubri pesanti ai lati.",
+            "Mantieni la schiena dritta e il petto in fuori.",
+            "Cammina a passi normali per una distanza/tempo prefissato.",
+            "Mantieni la presa salda."
+        ],
+        "tips": "Allena grip, core e postura.",
+        "images": [img("Farmers_Walk", 0), img("Farmers_Walk", 1)],
+    },
+    {
+        "id": "battle-ropes",
+        "name": "Battle Ropes",
+        "category": "Cardio",
+        "muscle_group": "Cardio",
+        "secondary_muscles": ["Spalle", "Core"],
+        "equipment": "Corde",
+        "level": "Intermedio",
+        "instructions": [
+            "Afferra le estremità delle corde, una per mano.",
+            "Piedi alla larghezza delle spalle, ginocchia leggermente piegate.",
+            "Crea onde alternando o sincronizzando le braccia.",
+            "Mantieni il ritmo per il tempo previsto."
+        ],
+        "tips": "Ottimo per condizionamento metabolico.",
+        "images": [img("Battling_Ropes", 0), img("Battling_Ropes", 1)],
+    },
+    {
+        "id": "box-jump",
+        "name": "Box Jump",
+        "category": "Pliometrico",
+        "muscle_group": "Gambe",
+        "secondary_muscles": ["Glutei", "Cardio"],
+        "equipment": "Box",
+        "level": "Intermedio",
+        "instructions": [
+            "Posizionati di fronte a un box stabile.",
+            "Piega leggermente le ginocchia caricando le anche.",
+            "Salta sul box atterrando in squat leggero.",
+            "Scendi dal box e ripeti."
+        ],
+        "tips": "Atterra morbido sul box, non saltare giù di slancio.",
+        "images": [img("Box_Jump_Multiple_Response", 0), img("Box_Jump_Multiple_Response", 1)],
+    },
+
+    # ============ AVAMBRACCI ============
+    {
+        "id": "wrist-curl",
+        "name": "Wrist Curl ai Cavi",
+        "category": "Isolamento",
+        "muscle_group": "Avambracci",
+        "secondary_muscles": [],
+        "equipment": "Cavi",
+        "level": "Principiante",
+        "instructions": [
+            "Inginocchiati di fronte al cavo basso.",
+            "Appoggia gli avambracci sulla panca, polsi nel vuoto.",
+            "Afferra l'impugnatura con presa supina.",
+            "Fletti i polsi verso l'alto contraendo gli avambracci.",
+            "Abbassa lentamente."
+        ],
+        "tips": "Range di movimento completo per massimo sviluppo.",
+        "images": [img("Cable_Wrist_Curl", 0), img("Cable_Wrist_Curl", 1)],
     },
 ]
 

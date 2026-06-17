@@ -41,12 +41,30 @@ export default function SchedeScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={["top"]} testID="schede-screen">
       <View style={styles.header}>
-        <Text style={styles.title}>Le Mie Schede</Text>
-        <Text style={styles.subtitle}>
-          {workouts.length === 0
-            ? "Crea la tua prima scheda di allenamento"
-            : `${workouts.length} schede attive`}
-        </Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>Le Mie Schede</Text>
+          <Text style={styles.subtitle}>
+            {workouts.length === 0
+              ? "Crea la tua prima scheda di allenamento"
+              : `${workouts.length} schede attive`}
+          </Text>
+        </View>
+        <Pressable
+          onPress={() => router.push("/picker/calculator")}
+          hitSlop={8}
+          style={styles.headerBtn}
+          testID="open-calculator-btn"
+        >
+          <Ionicons name="calculator-outline" size={22} color={colors.onSurface} />
+        </Pressable>
+        <Pressable
+          onPress={() => router.push("/picker/presets")}
+          hitSlop={8}
+          style={styles.headerBtn}
+          testID="open-presets-btn"
+        >
+          <Ionicons name="library-outline" size={22} color={colors.onSurface} />
+        </Pressable>
       </View>
 
       {loading ? null : workouts.length === 0 ? (
@@ -140,6 +158,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
     paddingBottom: spacing.md,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  headerBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.surfaceSecondary,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     color: colors.onSurface,

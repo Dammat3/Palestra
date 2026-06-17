@@ -50,6 +50,7 @@ async def list_exercises(
             "equipment": e["equipment"],
             "level": e["level"],
             "image": e["images"][0] if e["images"] else None,
+            "images": e["images"],
         }
         for e in results
     ]

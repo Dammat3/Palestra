@@ -25,6 +25,7 @@ import {
   saveHistory,
   uid,
 } from "@/src/storage";
+import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
 
 function fmtSec(total: number) {
   const m = Math.floor(total / 60);
@@ -145,9 +146,34 @@ export default function ActiveWorkoutScreen() {
     if (!wasDone) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       const ex = w.exercises[exIdx];
-      const isLast = setIdx === logs[exIdx].sets.length - 1;
-      const restSec = isLast ? w.exerciseRestSeconds : ex.restSeconds;
-      const label = isLast ? "Pausa Esercizio" : "Pausa Serie";
+      const isLastSetOfEx = setIdx === logs[exIdx].sets.length - 1;
+
+      // Superset behavior: if this exercise is part of a superset group,
+      // don't rest between exercises in the same set round. Rest only after
+      // the LAST exercise of the group has completed this set index.
+      const grp = ex.supersetGroup;
+      if (grp) {
+        const groupIndices = w.exercises
+          .map((e, i) => (e.supersetGroup === grp ? i : -1))
+          .filter((i) => i >= 0);
+        const isLastInGroup = exIdx === groupIndices[groupIndices.length - 1];
+        if (!isLastInGroup) {
+          // Don't start a rest; user moves to next exercise in superset.
+          return;
+        }
+        // Use ~half-rest after a full superset round (or the exercise rest)
+        const restSec = isLastSetOfEx ? w.exerciseRestSeconds : ex.restSeconds;
+        setRest({
+          active: true,
+          remaining: restSec,
+          total: restSec,
+          label: isLastSetOfEx ? "Pausa Superset" : "Pausa Giro Superset",
+        });
+        return;
+      }
+
+      const restSec = isLastSetOfEx ? w.exerciseRestSeconds : ex.restSeconds;
+      const label = isLastSetOfEx ? "Pausa Esercizio" : "Pausa Serie";
       setRest({ active: true, remaining: restSec, total: restSec, label });
     }
   };
@@ -223,23 +249,40 @@ export default function ActiveWorkoutScreen() {
         >
           {logs.map((ex, exIdx) => {
             const meta = w.exercises[exIdx];
+            const isSuperset = !!meta?.supersetGroup;
+            const isFirstOfGroup =
+              isSuperset &&
+              (exIdx === 0 || w.exercises[exIdx - 1].supersetGroup !== meta?.supersetGroup);
             return (
-              <View key={exIdx} style={styles.exBlock} testID={`active-ex-${exIdx}`}>
-                <View style={styles.exHead}>
-                  {meta?.image ? (
-                    <Image source={{ uri: meta.image }} style={styles.exImg} contentFit="cover" />
-                  ) : (
-                    <View style={[styles.exImg, { alignItems: "center", justifyContent: "center" }]}>
-                      <Ionicons name="barbell" size={18} color={colors.onSurfaceTertiary} />
-                    </View>
-                  )}
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.exTitle}>{ex.exerciseName}</Text>
-                    <Text style={styles.exSub}>
-                      {ex.muscleGroup} · {meta?.targetSets || ex.sets.length}x{meta?.targetReps || "?"} · Pausa {meta?.restSeconds}s
-                    </Text>
+              <View key={exIdx} style={{ marginBottom: spacing.md }} testID={`active-ex-${exIdx}`}>
+                {isFirstOfGroup && (
+                  <View style={styles.supersetBadge}>
+                    <Ionicons name="link" size={12} color={colors.brandPrimary} />
+                    <Text style={styles.supersetBadgeText}>SUPERSET</Text>
                   </View>
-                </View>
+                )}
+                <View style={[styles.exBlock, isSuperset && styles.exBlockSuperset]}>
+                  <View style={styles.exHead}>
+                    {meta?.images && meta.images.length > 0 ? (
+                      <AnimatedExerciseImage
+                        images={meta.images}
+                        style={styles.exImg}
+                        contentFit="cover"
+                      />
+                    ) : meta?.image ? (
+                      <Image source={{ uri: meta.image }} style={styles.exImg} contentFit="cover" />
+                    ) : (
+                      <View style={[styles.exImg, { alignItems: "center", justifyContent: "center" }]}>
+                        <Ionicons name="barbell" size={18} color={colors.onSurfaceTertiary} />
+                      </View>
+                    )}
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.exTitle}>{ex.exerciseName}</Text>
+                      <Text style={styles.exSub}>
+                        {ex.muscleGroup} · {meta?.targetSets || ex.sets.length}x{meta?.targetReps || "?"} · Pausa {meta?.restSeconds}s
+                      </Text>
+                    </View>
+                  </View>
 
                 <View style={styles.setHeader}>
                   <Text style={[styles.setHeaderText, { width: 28 }]}>#</Text>
@@ -296,6 +339,7 @@ export default function ActiveWorkoutScreen() {
                   <Ionicons name="add" size={16} color={colors.brandPrimary} />
                   <Text style={styles.addSetText}>Aggiungi serie</Text>
                 </Pressable>
+              </View>
               </View>
             );
           })}
@@ -398,7 +442,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     marginTop: spacing.md,
   },
-  exBlock: { backgroundColor: colors.surfaceSecondary, borderRadius: radius.md, padding: spacing.md, borderWidth: 1, borderColor: colors.border, marginBottom: spacing.md },
+  exBlock: { backgroundColor: colors.surfaceSecondary, borderRadius: radius.md, padding: spacing.md, borderWidth: 1, borderColor: colors.border },
+  exBlockSuperset: { borderColor: colors.brandPrimary },
+  supersetBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    alignSelf: "flex-start",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    backgroundColor: colors.brandTertiary,
+    borderRadius: radius.sm,
+    marginBottom: spacing.xs,
+  },
+  supersetBadgeText: { color: colors.brandPrimary, fontWeight: "800", fontSize: 10, letterSpacing: 1 },
   exHead: { flexDirection: "row", alignItems: "center", gap: spacing.md, marginBottom: spacing.md },
   exImg: { width: 44, height: 44, borderRadius: radius.sm, backgroundColor: colors.surfaceTertiary, overflow: "hidden" },
   exTitle: { color: colors.onSurface, fontWeight: "700", fontSize: typography.sizes.base },

@@ -49,6 +49,14 @@ export default function RootLayout() {
             name="picker/exercises"
             options={{ presentation: "modal", animation: "slide_from_bottom" }}
           />
+          <Stack.Screen
+            name="picker/presets"
+            options={{ presentation: "modal", animation: "slide_from_bottom" }}
+          />
+          <Stack.Screen
+            name="picker/calculator"
+            options={{ presentation: "modal", animation: "slide_from_bottom" }}
+          />
         </Stack>
       </SafeAreaProvider>
     </GestureHandlerRootView>

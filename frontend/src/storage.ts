@@ -15,10 +15,12 @@ export type ExerciseEntry = {
   exerciseName: string;
   muscleGroup: string;
   image?: string | null;
+  images?: string[]; // animation frames
   targetSets: number;
   targetReps: number;
   targetWeight: number; // kg
   restSeconds: number;
+  supersetGroup?: string | null;
 };
 
 export type Workout = {

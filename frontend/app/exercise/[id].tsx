@@ -15,6 +15,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 
 import { colors, radius, spacing, typography } from "@/src/theme";
 import { ExerciseDetail, fetchExerciseDetail } from "@/src/api";
+import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
 
 export default function ExerciseDetailScreen() {
   const router = useRouter();
@@ -39,12 +40,12 @@ export default function ExerciseDetailScreen() {
         ) : ex ? (
           <>
             <View style={styles.hero}>
-              {ex.images[0] ? (
-                <Image
-                  source={{ uri: ex.images[0] }}
+              {ex.images && ex.images.length > 0 ? (
+                <AnimatedExerciseImage
+                  images={ex.images}
                   style={{ width: "100%", height: "100%" }}
                   contentFit="cover"
-                  transition={250}
+                  intervalMs={650}
                 />
               ) : (
                 <View style={styles.heroPlaceholder}>
@@ -73,14 +74,20 @@ export default function ExerciseDetailScreen() {
 
               {ex.images.length > 1 && (
                 <View style={styles.gallery}>
-                  {ex.images.map((img, i) => (
-                    <Image
-                      key={i}
-                      source={{ uri: img }}
-                      style={styles.gImg}
-                      contentFit="cover"
-                    />
-                  ))}
+                  <View style={styles.galleryHint}>
+                    <Ionicons name="play-circle" size={16} color={colors.brandPrimary} />
+                    <Text style={styles.galleryHintText}>Animazione movimento</Text>
+                  </View>
+                  <View style={styles.galleryRow}>
+                    {ex.images.map((img, i) => (
+                      <Image
+                        key={i}
+                        source={{ uri: img }}
+                        style={styles.gImg}
+                        contentFit="cover"
+                      />
+                    ))}
+                  </View>
                 </View>
               )}
 
@@ -163,7 +170,10 @@ const styles = StyleSheet.create({
   tagPrimary: { backgroundColor: colors.brandTertiary, borderColor: colors.brandSecondary },
   tagText: { color: colors.onSurfaceSecondary, fontWeight: "600", fontSize: 13 },
   tagTextPrimary: { color: colors.brandPrimary },
-  gallery: { flexDirection: "row", gap: spacing.sm, marginTop: spacing.lg },
+  gallery: { marginTop: spacing.lg, gap: spacing.sm },
+  galleryHint: { flexDirection: "row", alignItems: "center", gap: 4 },
+  galleryHintText: { color: colors.brandPrimary, fontWeight: "700", fontSize: typography.sizes.sm },
+  galleryRow: { flexDirection: "row", gap: spacing.sm },
   gImg: { flex: 1, height: 120, borderRadius: radius.md, backgroundColor: colors.surfaceTertiary },
   section: { color: colors.onSurface, fontWeight: "700", fontSize: typography.sizes.lg, marginTop: spacing.xl, marginBottom: spacing.md },
   stepsCard: {

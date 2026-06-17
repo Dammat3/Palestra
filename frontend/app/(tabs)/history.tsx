@@ -50,11 +50,91 @@ export default function HistoryScreen() {
     load();
   };
 
+  const onExportCSV = async () => {
+    if (history.length === 0) return;
+    const rows = [
+      [
+        "Data",
+        "Scheda",
+        "Esercizio",
+        "Set",
+        "Ripetizioni",
+        "Peso (kg)",
+        "Volume",
+        "Durata (min)",
+      ].join(","),
+    ];
+    for (const h of history) {
+      const dateIso = h.finishedAt;
+      const durMin = (h.durationSec / 60).toFixed(1);
+      for (const ex of h.exercises) {
+        ex.sets.forEach((s, i) => {
+          if (!s.done) return;
+          rows.push(
+            [
+              dateIso,
+              csv(h.workoutName),
+              csv(ex.exerciseName),
+              i + 1,
+              s.reps,
+              s.weight,
+              (s.reps * s.weight).toFixed(2),
+              durMin,
+            ].join(","),
+          );
+        });
+      }
+    }
+    const content = rows.join("\n");
+    const filename = `palestra-storico-${new Date().toISOString().slice(0, 10)}.csv`;
+    try {
+      const dir =
+        (FileSystem as unknown as { cacheDirectory?: string }).cacheDirectory ||
+        (FileSystem as unknown as { documentDirectory?: string }).documentDirectory;
+      if (!dir) return;
+      const uri = `${dir}${filename}`;
+      // expo-file-system legacy API
+      const legacy = FileSystem as unknown as {
+        writeAsStringAsync?: (uri: string, content: string) => Promise<void>;
+      };
+      if (typeof legacy.writeAsStringAsync === "function") {
+        await legacy.writeAsStringAsync(uri, content);
+      } else {
+        const FsNew = await import("expo-file-system");
+        // @ts-expect-error new modular API
+        await FsNew.File.fromUri(uri).write(content);
+      }
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(uri, {
+          mimeType: "text/csv",
+          dialogTitle: "Esporta Storico",
+        });
+      }
+    } catch (e) {
+      console.warn("CSV export failed", e);
+    }
+  };
+
+  const csv = (s: string) => `"${s.replace(/"/g, '""')}"`;
+
   return (
     <SafeAreaView style={styles.safe} edges={["top"]} testID="history-screen">
       <View style={styles.header}>
-        <Text style={styles.title}>Storico</Text>
-        <Text style={styles.subtitle}>{history.length} allenamenti completati</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>Storico</Text>
+          <Text style={styles.subtitle}>{history.length} allenamenti completati</Text>
+        </View>
+        {history.length > 0 && (
+          <Pressable
+            onPress={onExportCSV}
+            style={styles.exportBtn}
+            hitSlop={8}
+            testID="export-csv-btn"
+          >
+            <Ionicons name="share-outline" size={18} color={colors.brandPrimary} />
+            <Text style={styles.exportText}>CSV</Text>
+          </Pressable>
+        )}
       </View>
 
       {history.length === 0 ? (
@@ -172,7 +252,19 @@ function Metric({ label, value }: { label: string; value: string }) {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.surface },
-  header: { paddingHorizontal: spacing.lg, paddingTop: spacing.md, paddingBottom: spacing.md },
+  header: { paddingHorizontal: spacing.lg, paddingTop: spacing.md, paddingBottom: spacing.md, flexDirection: "row", alignItems: "center", gap: spacing.sm },
+  exportBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 8,
+    backgroundColor: colors.brandTertiary,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    borderColor: colors.brandSecondary,
+  },
+  exportText: { color: colors.brandPrimary, fontWeight: "700", fontSize: typography.sizes.sm },
   title: {
     color: colors.onSurface,
     fontSize: typography.sizes.xxxl,

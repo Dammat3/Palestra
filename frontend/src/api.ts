@@ -11,6 +11,7 @@ export type ExerciseListItem = {
   equipment: string;
   level: string;
   image: string | null;
+  images?: string[];
 };
 
 export type ExerciseDetail = ExerciseListItem & {

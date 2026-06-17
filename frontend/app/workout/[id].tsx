@@ -23,6 +23,7 @@ import {
   getWorkout,
   saveWorkout,
 } from "@/src/storage";
+import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
 
 export default function WorkoutEditScreen() {
   const router = useRouter();
@@ -74,6 +75,33 @@ export default function WorkoutEditScreen() {
     if (newIdx < 0 || newIdx >= w.exercises.length) return;
     const exercises = [...w.exercises];
     [exercises[idx], exercises[newIdx]] = [exercises[newIdx], exercises[idx]];
+    const nw = { ...w, exercises };
+    setW(nw);
+    saveWorkout(nw);
+  };
+
+  // Toggle superset link with the PREVIOUS exercise.
+  const toggleSuperset = (idx: number) => {
+    if (idx === 0) return;
+    Haptics.selectionAsync();
+    const prev = w.exercises[idx - 1];
+    const cur = w.exercises[idx];
+    const exercises = [...w.exercises];
+    if (cur.supersetGroup && cur.supersetGroup === prev.supersetGroup) {
+      // unlink: clear current's group (and possibly subsequent ones that shared it)
+      const grp = cur.supersetGroup;
+      for (let i = idx; i < exercises.length; i++) {
+        if (exercises[i].supersetGroup === grp) {
+          exercises[i] = { ...exercises[i], supersetGroup: null };
+        } else {
+          break;
+        }
+      }
+    } else {
+      const grp = prev.supersetGroup || `g${Date.now().toString(36)}`;
+      exercises[idx - 1] = { ...prev, supersetGroup: grp };
+      exercises[idx] = { ...cur, supersetGroup: grp };
+    }
     const nw = { ...w, exercises };
     setW(nw);
     saveWorkout(nw);
@@ -139,18 +167,37 @@ export default function WorkoutEditScreen() {
             </Pressable>
           ) : (
             <View style={{ gap: spacing.md }}>
-              {w.exercises.map((ex, idx) => (
-                <ExerciseEditCard
-                  key={`${ex.exerciseId}-${idx}`}
-                  ex={ex}
-                  onChange={(p) => updateExercise(idx, p)}
-                  onRemove={() => removeExercise(idx)}
-                  onUp={() => moveExercise(idx, -1)}
-                  onDown={() => moveExercise(idx, 1)}
-                  canUp={idx > 0}
-                  canDown={idx < w.exercises.length - 1}
-                />
-              ))}
+              {w.exercises.map((ex, idx) => {
+                const isSuperset =
+                  !!ex.supersetGroup &&
+                  ((idx > 0 && w.exercises[idx - 1].supersetGroup === ex.supersetGroup) ||
+                    (idx < w.exercises.length - 1 &&
+                      w.exercises[idx + 1].supersetGroup === ex.supersetGroup));
+                const linkedWithPrev =
+                  idx > 0 && !!ex.supersetGroup &&
+                  w.exercises[idx - 1].supersetGroup === ex.supersetGroup;
+                return (
+                  <View key={`${ex.exerciseId}-${idx}`}>
+                    {linkedWithPrev && (
+                      <View style={styles.supersetLink}>
+                        <Ionicons name="link" size={12} color={colors.brandPrimary} />
+                        <Text style={styles.supersetLinkText}>SUPERSET</Text>
+                      </View>
+                    )}
+                    <ExerciseEditCard
+                      ex={ex}
+                      isSuperset={isSuperset}
+                      onChange={(p) => updateExercise(idx, p)}
+                      onRemove={() => removeExercise(idx)}
+                      onUp={() => moveExercise(idx, -1)}
+                      onDown={() => moveExercise(idx, 1)}
+                      onToggleSuperset={idx > 0 ? () => toggleSuperset(idx) : undefined}
+                      canUp={idx > 0}
+                      canDown={idx < w.exercises.length - 1}
+                    />
+                  </View>
+                );
+              })}
               <Pressable
                 onPress={onAddExercise}
                 style={styles.addMore}
@@ -184,18 +231,22 @@ export default function WorkoutEditScreen() {
 
 function ExerciseEditCard({
   ex,
+  isSuperset,
   onChange,
   onRemove,
   onUp,
   onDown,
+  onToggleSuperset,
   canUp,
   canDown,
 }: {
   ex: ExerciseEntry;
+  isSuperset?: boolean;
   onChange: (p: Partial<ExerciseEntry>) => void;
   onRemove: () => void;
   onUp: () => void;
   onDown: () => void;
+  onToggleSuperset?: () => void;
   canUp: boolean;
   canDown: boolean;
 }) {
@@ -204,10 +255,16 @@ function ExerciseEditCard({
     return Number.isFinite(n) ? n : 0;
   };
   return (
-    <View style={styles.exCard}>
+    <View style={[styles.exCard, isSuperset && styles.exCardSuperset]}>
       <View style={styles.exCardTop}>
         <View style={styles.exThumb}>
-          {ex.image ? (
+          {ex.images && ex.images.length > 0 ? (
+            <AnimatedExerciseImage
+              images={ex.images}
+              style={{ width: "100%", height: "100%" }}
+              contentFit="cover"
+            />
+          ) : ex.image ? (
             <Image source={{ uri: ex.image }} style={{ width: "100%", height: "100%" }} contentFit="cover" />
           ) : (
             <Ionicons name="barbell" size={20} color={colors.onSurfaceTertiary} />
@@ -218,6 +275,19 @@ function ExerciseEditCard({
           <Text style={styles.exMuscle}>{ex.muscleGroup}</Text>
         </View>
         <View style={styles.exActions}>
+          {onToggleSuperset && (
+            <Pressable
+              onPress={onToggleSuperset}
+              hitSlop={6}
+              testID={`toggle-superset-${ex.exerciseId}`}
+            >
+              <Ionicons
+                name={isSuperset ? "link" : "link-outline"}
+                size={18}
+                color={isSuperset ? colors.brandPrimary : colors.onSurfaceSecondary}
+              />
+            </Pressable>
+          )}
           <Pressable
             onPress={onUp}
             disabled={!canUp}
@@ -358,6 +428,20 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     gap: spacing.md,
   },
+  exCardSuperset: { borderColor: colors.brandPrimary },
+  supersetLink: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    alignSelf: "center",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+    backgroundColor: colors.brandTertiary,
+    borderRadius: radius.sm,
+    marginBottom: -spacing.xs,
+    marginTop: -spacing.xs,
+  },
+  supersetLinkText: { color: colors.brandPrimary, fontWeight: "800", fontSize: 10, letterSpacing: 1 },
   exCardTop: { flexDirection: "row", alignItems: "center", gap: spacing.md },
   exThumb: {
     width: 48,

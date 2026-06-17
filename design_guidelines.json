@@ -1,0 +1,172 @@
+{
+  "app_name": "WorkoutTrackerIT",
+  "personality": "7 Dark-First Utility",
+  "personality_one_liner": "Un centro di comando atletico e resistente, progettato per scansionare rapidamente i dati durante l'allenamento con un'estetica scura, calma ed energica.",
+  "color": {
+    "surface": "#111113",
+    "onSurface": "#F2F2F2",
+    "surfaceSecondary": "#1C1C1E",
+    "onSurfaceSecondary": "#A1A1A5",
+    "surfaceTertiary": "#2C2C2E",
+    "onSurfaceTertiary": "#8E8E93",
+    "surfaceInverse": "#F2F2F2",
+    "onSurfaceInverse": "#111113",
+    "brand": "#D9654B",
+    "brandPrimary": "#D9654B",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#3A231E",
+    "onBrandSecondary": "#D9654B",
+    "brandTertiary": "#261B19",
+    "onBrandTertiary": "#D9654B",
+    "success": "#729B79",
+    "onSuccess": "#FFFFFF",
+    "warning": "#E0A96D",
+    "onWarning": "#111113",
+    "error": "#C25953",
+    "onError": "#FFFFFF",
+    "info": "#6D8EA0",
+    "onInfo": "#FFFFFF",
+    "border": "#2C2C2E",
+    "borderStrong": "#3A3A3C",
+    "divider": "#2C2C2E"
+  },
+  "typography": {
+    "displayFontFamily": "Barlow Condensed",
+    "textFontFamily": "Satoshi",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous intentional padding around content. Avoid empty halves of the screen by using single-column width minus padding. Touch targets >= 44x44pt.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": 0,
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": false,
+    "do's": [],
+    "dont's": [
+      "No glassmorphism on dense data screens. Use solid tonal backgrounds (surfaceSecondary) for durability and clarity."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Schede di Allenamento",
+      "purpose": "Home screen to select and start workout routines.",
+      "states": {
+        "loading": "Centered spinner 'Caricamento schede...'",
+        "empty": "Illustration/image of kettlebells, 'Nessuna scheda creata' and a primary CTA 'Crea Nuova Scheda'.",
+        "error": "Message 'Errore nel caricamento delle schede' with a 'Riprova' button."
+      },
+      "layout": "Large header 'Le Mie Schede'. Single column list of workout cards using surfaceSecondary with 1px border. Each card shows title, muscle groups, and estimated time. Sticky primary CTA 'Crea Nuova Scheda' pinned at bottom above tab bar."
+    },
+    {
+      "name": "Libreria Esercizi",
+      "purpose": "Browse and search the exercise database in Italian.",
+      "states": {
+        "loading": "Centered spinner 'Caricamento esercizi...'",
+        "empty": "Message 'Nessun esercizio trovato' for search.",
+        "error": "Message 'Impossibile caricare il database' with 'Riprova'."
+      },
+      "layout": "Sticky search bar at top. Horizontal scrollable segmented controls for muscle groups (Petto, Dorso, Gambe, etc.). List of exercises with 56pt height rows, leading thumbnail image (using surfaceTertiary if no image), Title, and Subtitle (Equipment)."
+    },
+    {
+      "name": "Sessione di Allenamento Attiva",
+      "purpose": "Track live workout progress, log sets/reps/weight, and manage rest periods.",
+      "states": {
+        "loading": "Spinner 'Avvio sessione...'",
+        "empty": "N/A",
+        "error": "Error dialog to save progress locally."
+      },
+      "layout": "Top bar: 'Termina' button + current elapsed time. Body: Stacked modules of exercises. Each module contains rows for Set #, Reps input, Weight input, and a large checkbox to mark done. Rest Timer Overlay: Fixed panel at the bottom of the screen displaying a large countdown timer in Barlow Condensed, with Start/Skip controls. It uses solid surfaceSecondary background with top borderStrong for high contrast."
+    },
+    {
+      "name": "Progressi",
+      "purpose": "Visualize training volume, 1RM estimates, and workout frequency.",
+      "states": {
+        "loading": "Spinner 'Analisi progressi...'",
+        "empty": "Message 'Completa un allenamento per vedere i tuoi progressi'.",
+        "error": "Message 'Errore nel caricamento dei dati'."
+      },
+      "layout": "High-contrast data visualization. Slim weekly line/bar chart for completed sessions. Compact stat row above chart (Allenamenti, Volume Totale). Highlight current value, use brandPrimary for chart accents. Neutral background."
+    },
+    {
+      "name": "Storico Allenamenti",
+      "purpose": "Log of past completed workout sessions.",
+      "states": {
+        "loading": "Spinner 'Caricamento storico...'",
+        "empty": "Message 'Ancora nessun allenamento completato'.",
+        "error": "Message 'Errore nel caricamento dello storico'."
+      },
+      "layout": "Vertical timeline list showing Date, Workout Name, and total Volume lifted. Subtle dividers between rows. Clean typography with monospace/condensed font for metrics."
+    },
+    {
+      "name": "Dettaglio Esercizio",
+      "purpose": "Show exercise instructions, target muscles, and personal history.",
+      "states": {
+        "loading": "Spinner 'Caricamento dettagli...'",
+        "empty": "N/A",
+        "error": "Message 'Impossibile caricare i dettagli'."
+      },
+      "layout": "Hero image/GIF at top with gradient-to-dark scrim. Exercise title and description text in Italian. 'Storico Performance' section at the bottom showing past weights lifted."
+    }
+  ],
+  "images": {
+    "empty_schede": {
+      "url": "https://images.pexels.com/photos/32610333/pexels-photo-32610333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Kettlebells and weights in a modern dark gym"
+    },
+    "hero_esercizio_placeholder": {
+      "url": "https://images.pexels.com/photos/4716814/pexels-photo-4716814.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Gym equipment layout"
+    }
+  },
+  "haptics": {
+    "button_press": "light",
+    "tab_change": "light",
+    "timer_start": "medium",
+    "timer_complete": "success",
+    "set_complete": "success"
+  },
+  "instructions_to_main_agent": [
+    "Design specifically for iOS. Ensure safe area views are respected so content doesn't sit under the notch/dynamic island.",
+    "The app must be entirely localized in Italian.",
+    "Implement 'Barlow Condensed' exclusively for metrics, timers, and large titles to create an athletic, live-data feel. Use 'Satoshi' for body text.",
+    "The Active Workout screen is the core feature. Ensure inputs for reps/weight are large (min 44x44pt) to allow easy interaction with sweaty fingers. Disable autocorrect and use numeric keyboards.",
+    "The Rest Timer in the Active Workout must be a fixed overlay at the bottom of the scrolling content. It should use a solid background (no blur, per Dark-First Utility rules) for durability and fast scanning.",
+    "Always use a gradient-to-dark scrim (top to bottom, transparent to >=70% surfaceInverse) between images and overlaid text.",
+    "Keep interactions instant and reactive. Avoid slow cinematic animations; the app should feel machine-fast.",
+    "Use solid tonal backgrounds (surfaceSecondary, surfaceTertiary) and spacing instead of glassmorphism or shadows.",
+    "Apply haptic feedback to marking sets complete, starting timers, and finishing rests."
+  ]
+}

@@ -8,7 +8,7 @@ IMG_BASE = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exer
 
 
 def img(slug: str, idx: int = 0) -> str:
-    return f"{IMG_BASE}/{slug}/images/{idx}.jpg"
+    return f"{IMG_BASE}/{slug}/{idx}.jpg"
 
 
 EXERCISES = [

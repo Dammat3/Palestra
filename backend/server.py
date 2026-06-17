@@ -1,58 +1,73 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field
-from typing import List
-import uuid
-from datetime import datetime
+from typing import List, Optional
 
+from exercises_data import EXERCISES, MUSCLE_GROUPS
 
 ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+load_dotenv(ROOT_DIR / ".env")
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Create the main app without a prefix
-app = FastAPI()
-
-# Create a router with the /api prefix
+app = FastAPI(title="Palestra IT API")
 api_router = APIRouter(prefix="/api")
 
 
-# Define Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Palestra IT API", "exercises_count": len(EXERCISES)}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
+@api_router.get("/exercises")
+async def list_exercises(
+    q: Optional[str] = None,
+    muscle: Optional[str] = None,
+    equipment: Optional[str] = None,
+):
+    results = EXERCISES
+    if muscle and muscle != "all":
+        results = [e for e in results if e["muscle_group"] == muscle]
+    if equipment:
+        results = [e for e in results if e["equipment"].lower() == equipment.lower()]
+    if q:
+        ql = q.lower()
+        results = [
+            e
+            for e in results
+            if ql in e["name"].lower()
+            or ql in e["muscle_group"].lower()
+            or ql in e["equipment"].lower()
+        ]
+    # Light payload for list (omit instructions)
+    return [
+        {
+            "id": e["id"],
+            "name": e["name"],
+            "category": e["category"],
+            "muscle_group": e["muscle_group"],
+            "equipment": e["equipment"],
+            "level": e["level"],
+            "image": e["images"][0] if e["images"] else None,
+        }
+        for e in results
+    ]
 
-# Include the router in the main app
+
+@api_router.get("/exercises/groups")
+async def list_groups():
+    return MUSCLE_GROUPS
+
+
+@api_router.get("/exercises/{exercise_id}")
+async def get_exercise(exercise_id: str):
+    for e in EXERCISES:
+        if e["id"] == exercise_id:
+            return e
+    raise HTTPException(status_code=404, detail="Esercizio non trovato")
+
+
 app.include_router(api_router)
 
 app.add_middleware(
@@ -63,13 +78,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()

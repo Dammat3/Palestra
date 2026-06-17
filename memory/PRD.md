@@ -18,6 +18,10 @@ Simple, modern, minimal iPhone gym app in Italian. 100% free, no auth, fully loc
 - **Superset mode**: `supersetGroup` field on `ExerciseEntry`. Toggle in workout edit links current exercise to previous. Active session shows a SUPERSET badge and only triggers rest after the LAST exercise in the group completes its set (so the user alternates exercises in a round before resting).
 - **CSV Export Storico**: button on history tab uses `expo-sharing` + `expo-file-system` to share a CSV with per-set rows (Data, Scheda, Esercizio, Set, Rip, Peso, Volume, Durata).
 
+## Phase 3 — fully offline
+- Exercise DB moved to a bundled `src/exercises.json` (~84 KB, 102 esercizi). `src/api.ts` now reads from local JSON, no `fetch` calls remain in the app.
+- Backend kept in repo as data source/dev tooling but **not required at runtime** — the app works without internet (after first image load, expo-image's memory+disk cache serves the GIFs offline too). Backend can be disabled to save Emergent monthly credits.
+
 ## Architecture
 - Frontend: Expo Router file-based routing — 4 tabs + modal routes for picker/exercises, picker/presets, picker/calculator. Stack route for workout edit and active session and exercise detail.
 - Backend: FastAPI, read-only `/api/exercises*` endpoints on a static Italian DB in `/app/backend/exercises_data.py`. Images proxied from yuhonas/free-exercise-db on GitHub.

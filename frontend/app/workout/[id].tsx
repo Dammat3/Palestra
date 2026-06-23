@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -351,12 +351,28 @@ function Field({
   onChange: (v: string) => void;
   testID?: string;
 }) {
+  const [draft, setDraft] = useState(value);
+  const isFocused = useRef(false);
+
+  useEffect(() => {
+    if (!isFocused.current) {
+      setDraft(value);
+    }
+  }, [value]);
+
   return (
     <View style={styles.field}>
       <Text style={styles.fieldLabel}>{label}</Text>
       <TextInput
-        value={value}
-        onChangeText={onChange}
+        value={draft}
+        onChangeText={setDraft}
+        onFocus={() => {
+          isFocused.current = true;
+        }}
+        onBlur={() => {
+          isFocused.current = false;
+          onChange(draft);
+        }}
         keyboardType="decimal-pad"
         selectTextOnFocus
         style={styles.fieldInput}

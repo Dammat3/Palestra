@@ -2217,6 +2217,696 @@
         "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Wrist_Curl/0.jpg",
         "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Wrist_Curl/1.jpg"
       ]
+    },
+    {
+      "id": "panca-declinata-manubri",
+      "name": "Panca Declinata con Manubri",
+      "category": "Forza",
+      "muscle_group": "Petto",
+      "secondary_muscles": [
+        "Tricipiti",
+        "Spalle"
+      ],
+      "equipment": "Manubri",
+      "level": "Intermedio",
+      "instructions": [
+        "Siediti su una panca declinata con i piedi assicurati sotto gli appositi supporti, un manubrio per mano appoggiato sulle cosce.",
+        "Sdraiati e porta i manubri ai lati del petto, gomiti piegati a circa 90 gradi: questa è la posizione di partenza.",
+        "Spingi i manubri verso l'alto fino a estendere quasi completamente le braccia, senza bloccare i gomiti.",
+        "Abbassa lentamente i manubri tornando alla posizione di partenza, mantenendo il controllo del movimento.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La declinazione sposta l'enfasi sulla parte bassa del petto: usa carichi leggermente inferiori rispetto alla panca piana e mantieni il movimento controllato per evitare di affaticare troppo le spalle.",
+      "images": []
+    },
+    {
+      "id": "croci-cavi-bassi",
+      "name": "Croci ai Cavi Bassi",
+      "category": "Isolamento",
+      "muscle_group": "Petto",
+      "secondary_muscles": [
+        "Spalle"
+      ],
+      "equipment": "Cavi",
+      "level": "Intermedio",
+      "instructions": [
+        "Posiziona le carrucole ai cavi alla base più bassa e afferra una maniglia per mano, facendo un passo avanti per creare tensione.",
+        "Parti con le braccia leggermente piegate ai lati del corpo, palmi rivolti in avanti.",
+        "Porta le maniglie verso l'alto e verso il centro, davanti al petto, in un movimento ad arco.",
+        "Contrai il petto al punto di massima contrazione, poi torna lentamente alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Lavorando dal basso verso l'alto, questo esercizio enfatizza la parte alta e centrale del petto: mantieni una leggera flessione del gomito per tutto il movimento.",
+      "images": []
+    },
+    {
+      "id": "stacco-sumo",
+      "name": "Stacco Sumo",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Gambe",
+        "Glutei"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Avanzato",
+      "instructions": [
+        "Posizionati con i piedi molto più larghi delle spalle, punte leggermente rivolte verso l'esterno, bilanciere a terra davanti a te.",
+        "Afferra il bilanciere con presa stretta, all'interno delle gambe, mantenendo la schiena dritta e il petto in fuori.",
+        "Spingi con forza attraverso i talloni, estendendo anche e ginocchia contemporaneamente fino alla posizione eretta.",
+        "Mantieni il bilanciere vicino al corpo durante tutta la salita.",
+        "Inverti il movimento controllando la discesa fino a riportare il bilanciere a terra.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La stance larga riduce il range di movimento e coinvolge maggiormente gli adduttori e i glutei rispetto allo stacco classico: mantieni le ginocchia in linea con i piedi durante tutto il movimento.",
+      "images": []
+    },
+    {
+      "id": "military-press-seduto-bilanciere",
+      "name": "Military Press Seduto con Bilanciere",
+      "category": "Forza",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [
+        "Tricipiti"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "Siediti su una panca con schienale verticale, afferra il bilanciere con presa poco più larga delle spalle e portalo all'altezza della parte alta del petto.",
+        "Mantieni il core contratto e la schiena appoggiata allo schienale: questa è la posizione di partenza.",
+        "Spingi il bilanciere verticalmente sopra la testa fino a estendere quasi completamente le braccia.",
+        "Abbassa il bilanciere con controllo fino a tornare alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La posizione seduta elimina il contributo delle gambe, isolando meglio le spalle: usa un carico inferiore rispetto alla variante in piedi.",
+      "images": []
+    },
+    {
+      "id": "push-press",
+      "name": "Push Press",
+      "category": "Forza",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [
+        "Gambe",
+        "Tricipiti"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Avanzato",
+      "instructions": [
+        "Porta il bilanciere all'altezza delle clavicole con presa poco più larga delle spalle, piedi alla larghezza del bacino.",
+        "Esegui una breve flessione di ginocchia e anche, come per un mini squat: questa è la posizione di partenza.",
+        "Estendi con forza ginocchia e anche e usa lo slancio generato per spingere il bilanciere sopra la testa.",
+        "Blocca le braccia in alto con le gambe distese, poi riporta il bilanciere alle clavicole con controllo.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Il push press permette di sollevare carichi maggiori della military press grazie alla spinta delle gambe: la coordinazione tra gambe e braccia è la chiave del movimento, non la sola forza delle spalle.",
+      "images": []
+    },
+    {
+      "id": "sissy-squat",
+      "name": "Sissy Squat",
+      "category": "Isolamento",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [],
+      "equipment": "Corpo libero",
+      "level": "Avanzato",
+      "instructions": [
+        "In piedi, afferrati a un supporto stabile per l'equilibrio, talloni leggermente alzati da terra.",
+        "Piegando solo le ginocchia in avanti, inclina il busto all'indietro mantenendo anche e busto in linea retta.",
+        "Scendi fino a sentire un forte stretch/contrazione sui quadricipiti, senza piegare le anche.",
+        "Risali spingendo con i quadricipiti fino alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "È un esercizio molto impegnativo per i quadricipiti e richiede buon controllo ed equilibrio: parti con poche ripetizioni e un supporto solido a cui aggrapparti.",
+      "images": []
+    },
+    {
+      "id": "abduttori-macchina",
+      "name": "Abduttori alla Macchina",
+      "category": "Isolamento",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [
+        "Glutei"
+      ],
+      "equipment": "Macchinario",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti sulla macchina per abduttori con le gambe all'interno dei cuscinetti, ginocchia leggermente piegate.",
+        "Imposta un carico adeguato e mantieni la schiena appoggiata allo schienale: questa è la posizione di partenza.",
+        "Spingi le gambe verso l'esterno, allontanandole l'una dall'altra contro la resistenza.",
+        "Torna lentamente alla posizione di partenza controllando il movimento.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Movimento mirato al medio gluteo e alla parte esterna dell'anca: evita di usare slanci, il beneficio viene dal controllo della fase negativa.",
+      "images": []
+    },
+    {
+      "id": "box-squat",
+      "name": "Box Squat",
+      "category": "Forza",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [
+        "Glutei"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "Posiziona un box o una panca robusta dietro di te, all'altezza desiderata, e carica il bilanciere su rack.",
+        "Posizionati sotto il bilanciere come per uno squat normale, piedi alla larghezza delle spalle.",
+        "Scendi controllando il movimento fino a sederti leggermente sul box, mantenendo la tensione su gambe e core senza rilassarti completamente.",
+        "Spingi con i talloni per risalire alla posizione eretta.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Il box aiuta a controllare la profondità e a lavorare sulla forza dal fondo del movimento: tocca il box senza appoggiarti completamente il peso, mantenendo la tensione muscolare.",
+      "images": []
+    },
+    {
+      "id": "glute-bridge",
+      "name": "Glute Bridge",
+      "category": "Isolamento",
+      "muscle_group": "Glutei",
+      "secondary_muscles": [
+        "Gambe"
+      ],
+      "equipment": "Corpo libero",
+      "level": "Principiante",
+      "instructions": [
+        "Sdraiati supino con le ginocchia piegate e i piedi appoggiati a terra alla larghezza del bacino.",
+        "Mantieni le braccia distese ai lati del corpo, palmi a terra per stabilità.",
+        "Spingendo con i talloni, solleva il bacino verso l'alto contraendo i glutei al massimo.",
+        "Mantieni la posizione per un secondo in alto, poi scendi con controllo senza far toccare completamente il bacino a terra.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Esercizio base per l'attivazione dei glutei, ottimo come riscaldamento prima di squat o stacchi: concentrati sulla contrazione volontaria dei glutei in alto, non sulla velocità.",
+      "images": []
+    },
+    {
+      "id": "spider-curl",
+      "name": "Spider Curl",
+      "category": "Isolamento",
+      "muscle_group": "Bicipiti",
+      "secondary_muscles": [],
+      "equipment": "Bilanciere EZ",
+      "level": "Intermedio",
+      "instructions": [
+        "Appoggia il petto sul lato inclinato di una panca Scott o una panca inclinata, braccia pendenti verso il basso con il bilanciere EZ in mano.",
+        "Parti con le braccia completamente distese: questa è la posizione di partenza.",
+        "Flettendo solo i gomiti, porta il bilanciere verso il viso contraendo i bicipiti.",
+        "Scendi lentamente fino alla distensione completa, mantenendo il petto sempre appoggiato.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La posizione con il petto appoggiato elimina qualsiasi compensazione con spalle o schiena, isolando al massimo il bicipite: è particolarmente efficace sul picco del muscolo.",
+      "images": []
+    },
+    {
+      "id": "skull-crusher",
+      "name": "Skull Crusher",
+      "category": "Isolamento",
+      "muscle_group": "Tricipiti",
+      "secondary_muscles": [],
+      "equipment": "Bilanciere EZ",
+      "level": "Intermedio",
+      "instructions": [
+        "Sdraiati su una panca piana con un bilanciere EZ tenuto sopra il petto, braccia completamente estese verso l'alto.",
+        "Mantenendo i gomiti fermi e puntati verso il soffitto, flettili abbassando il bilanciere verso la fronte.",
+        "Scendi con controllo fino a sentire un buon stretch sui tricipiti, senza muovere le spalle.",
+        "Estendi nuovamente le braccia tornando alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Il nome richiama la traiettoria del bilanciere verso la testa: per sicurezza, puoi far scendere il bilanciere leggermente dietro la fronte per evitare di colpirti se perdi il controllo.",
+      "images": []
+    },
+    {
+      "id": "v-up",
+      "name": "V-Up",
+      "category": "Corpo Libero",
+      "muscle_group": "Addome",
+      "secondary_muscles": [],
+      "equipment": "Corpo libero",
+      "level": "Intermedio",
+      "instructions": [
+        "Sdraiati supino con braccia e gambe distese, braccia oltre la testa: questa è la posizione di partenza.",
+        "Contraendo l'addome, solleva contemporaneamente busto e gambe tese, cercando di toccare i piedi con le mani in alto.",
+        "Il corpo deve formare una 'V' nel punto di massima contrazione.",
+        "Torna con controllo alla posizione di partenza senza far rimbalzare la schiena a terra.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Mantieni le gambe quanto più tese possibile per massimizzare il lavoro sull'addome: se è troppo difficile, puoi piegare leggermente le ginocchia in una variante più accessibile.",
+      "images": []
+    },
+    {
+      "id": "vogatore-rowing",
+      "name": "Vogatore (Rowing Machine)",
+      "category": "Cardio",
+      "muscle_group": "Cardio",
+      "secondary_muscles": [
+        "Dorso",
+        "Gambe"
+      ],
+      "equipment": "Macchinario",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti sul vogatore con i piedi assicurati ai pedali e afferra la maniglia con entrambe le mani.",
+        "Parti con le ginocchia piegate e le braccia distese in avanti: questa è la posizione di partenza.",
+        "Spingi con le gambe estendendo le ginocchia, poi inclina leggermente il busto all'indietro e infine tira la maniglia verso l'addome.",
+        "Inverti la sequenza per tornare alla posizione di partenza: braccia, poi busto, poi gambe.",
+        "Ripeti con un ritmo costante per la durata o il numero di ripetizioni previsto."
+      ],
+      "tips": "La sequenza corretta è 'gambe, busto, braccia' in spinta e l'inverso in ritorno: è un esercizio cardio completo che coinvolge anche dorso e gambe in modo significativo.",
+      "images": []
+    },
+    {
+      "id": "curl-inverso-bilanciere",
+      "name": "Curl Inverso con Bilanciere",
+      "category": "Isolamento",
+      "muscle_group": "Bicipiti",
+      "secondary_muscles": [
+        "Tricipiti"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "In piedi, afferra il bilanciere con presa prona (palmi rivolti verso il basso), mani alla larghezza delle spalle.",
+        "Mantieni i gomiti vicini al busto: questa è la posizione di partenza.",
+        "Flettendo solo i gomiti, porta il bilanciere verso l'alto contraendo gli avambracci e i bicipiti.",
+        "Scendi con controllo fino alla distensione completa delle braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La presa prona sposta parte del lavoro sugli avambracci e sul brachioradiale: usa un carico inferiore rispetto al curl classico, è normale essere meno forti in questa variante.",
+      "images": []
+    },
+    {
+      "id": "wrist-curl-bilanciere",
+      "name": "Wrist Curl con Bilanciere",
+      "category": "Isolamento",
+      "muscle_group": "Tricipiti",
+      "secondary_muscles": [],
+      "equipment": "Bilanciere",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti su una panca con gli avambracci appoggiati sulle cosce, polsi oltre le ginocchia, bilanciere in mano con presa supina.",
+        "Lascia che il bilanciere scenda verso il basso, distendendo completamente i polsi: questa è la posizione di partenza.",
+        "Flettendo solo i polsi, solleva il bilanciere verso l'alto contraendo gli avambracci.",
+        "Scendi lentamente con controllo fino alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Movimento isolato e di piccola ampiezza: usa carichi leggeri, l'obiettivo è la resistenza degli avambracci, non la forza massimale.",
+      "images": []
+    },
+    {
+      "id": "zottman-curl",
+      "name": "Zottman Curl",
+      "category": "Isolamento",
+      "muscle_group": "Bicipiti",
+      "secondary_muscles": [
+        "Tricipiti"
+      ],
+      "equipment": "Manubri",
+      "level": "Intermedio",
+      "instructions": [
+        "In piedi, afferra un manubrio per mano con presa supina (palmi verso l'alto), braccia distese lungo i fianchi.",
+        "Esegui un curl classico portando i manubri verso le spalle contraendo i bicipiti.",
+        "In alto, ruota i polsi così che i palmi siano rivolti verso il basso (presa prona).",
+        "Scendi lentamente con questa presa invertita, lavorando sugli avambracci nella fase negativa.",
+        "Ruota nuovamente i polsi in basso prima di ripetere il movimento.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Questo esercizio combina un curl classico in salita con un reverse curl in discesa, allenando contemporaneamente bicipiti e avambracci in un solo movimento.",
+      "images": []
+    },
+    {
+      "id": "landmine-press",
+      "name": "Landmine Press",
+      "category": "Forza",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [
+        "Petto",
+        "Tricipiti"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "Incastra un'estremità del bilanciere in un angolo o in un apposito supporto landmine, e afferra l'altra estremità con entrambe le mani all'altezza del petto.",
+        "In piedi o in affondo, con il busto leggermente inclinato in avanti: questa è la posizione di partenza.",
+        "Spingi il bilanciere in avanti e verso l'alto, estendendo le braccia lungo una traiettoria ad arco naturale.",
+        "Torna con controllo alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La traiettoria angolata del landmine è più rispettosa delle articolazioni della spalla rispetto a una pressa verticale classica, utile anche per chi ha fastidi alle spalle.",
+      "images": []
+    },
+    {
+      "id": "cable-crossover",
+      "name": "Cable Crossover",
+      "category": "Isolamento",
+      "muscle_group": "Petto",
+      "secondary_muscles": [
+        "Spalle"
+      ],
+      "equipment": "Cavi",
+      "level": "Intermedio",
+      "instructions": [
+        "Posiziona le carrucole ai cavi in alto e afferra una maniglia per mano, facendo un passo avanti tra le torri.",
+        "Parti con le braccia leggermente piegate, aperte ai lati del corpo, busto leggermente inclinato in avanti.",
+        "Porta le maniglie verso il basso e verso il centro, incrociando leggermente davanti al corpo.",
+        "Contrai il petto al massimo, poi torna lentamente alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Lavorando dall'alto verso il basso, questo esercizio enfatizza la parte bassa del petto: mantieni sempre una leggera flessione del gomito.",
+      "images": []
+    },
+    {
+      "id": "reverse-pec-deck",
+      "name": "Reverse Pec Deck",
+      "category": "Isolamento",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [
+        "Dorso"
+      ],
+      "equipment": "Macchinario",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti sulla macchina pec deck rivolto verso lo schienale, afferrando le maniglie con le braccia leggermente piegate davanti a te.",
+        "Mantieni il petto contro lo schienale: questa è la posizione di partenza.",
+        "Apri le braccia verso l'esterno e indietro, contraendo le spalle posteriori e la parte alta della schiena.",
+        "Torna con controllo alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Ottimo esercizio di isolamento per il deltoide posteriore, spesso trascurato: usa un carico moderato e concentrati sulla contrazione, non sullo slancio.",
+      "images": []
+    },
+    {
+      "id": "stacco-gambe-tese",
+      "name": "Stacco a Gambe Tese",
+      "category": "Forza",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [
+        "Dorso",
+        "Glutei"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "In piedi con il bilanciere a terra davanti a te, afferralo con presa prona alla larghezza delle spalle.",
+        "Mantenendo le gambe quasi completamente distese (leggerissima flessione del ginocchio), piega le anche per afferrare il bilanciere.",
+        "Risali estendendo le anche, mantenendo il bilanciere vicino alle gambe e la schiena dritta.",
+        "Scendi con controllo, piegando dalle anche e mantenendo le gambe tese, fino a sentire uno stretch sui femorali.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "A differenza dello stacco classico, qui il movimento parte principalmente dalle anche con le gambe quasi tese: enfatizza molto i femorali. Non forzare il range se senti tensione eccessiva sulla zona lombare.",
+      "images": []
+    },
+    {
+      "id": "trazioni-presa-larga",
+      "name": "Trazioni Presa Larga",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Bicipiti",
+        "Spalle"
+      ],
+      "equipment": "Sbarra",
+      "level": "Avanzato",
+      "instructions": [
+        "Afferra la sbarra con presa prona, mani molto più larghe delle spalle.",
+        "Parti da sospeso con le braccia completamente distese: questa è la posizione di partenza.",
+        "Tira il corpo verso l'alto fino a portare il mento sopra la sbarra, concentrandoti sul dorso più che sulle braccia.",
+        "Scendi con controllo fino alla distensione completa delle braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La presa larga riduce il coinvolgimento dei bicipiti e aumenta lo stress sul gran dorsale: aspettati di riuscire a fare meno ripetizioni rispetto alla presa standard.",
+      "images": []
+    },
+    {
+      "id": "trazioni-presa-inversa",
+      "name": "Trazioni Presa Inversa",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Bicipiti"
+      ],
+      "equipment": "Sbarra",
+      "level": "Intermedio",
+      "instructions": [
+        "Afferra la sbarra con presa supina (palmi rivolti verso il viso), mani alla larghezza delle spalle.",
+        "Parti da sospeso con le braccia completamente distese: questa è la posizione di partenza.",
+        "Tira il corpo verso l'alto fino a portare il mento sopra la sbarra.",
+        "Scendi con controllo fino alla distensione completa delle braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La presa supina coinvolge maggiormente i bicipiti rispetto alla presa prona classica, risultando spesso più accessibile per chi è alle prime trazioni.",
+      "images": []
+    },
+    {
+      "id": "lat-machine-presa-inversa",
+      "name": "Lat Machine Presa Inversa",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Bicipiti"
+      ],
+      "equipment": "Cavi",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti alla lat machine e afferra la barra con presa supina, mani alla larghezza delle spalle.",
+        "Mantieni il busto leggermente inclinato all'indietro e il petto in fuori: questa è la posizione di partenza.",
+        "Tira la barra verso il petto, contraendo il dorso e portando i gomiti vicino al busto.",
+        "Torna con controllo alla posizione di partenza, estendendo completamente le braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "La presa supina aumenta il coinvolgimento dei bicipiti rispetto alla presa prona standard, risultando una buona variante per chi vuole alternare gli stimoli.",
+      "images": []
+    },
+    {
+      "id": "rematore-t-bar",
+      "name": "Rematore T-Bar",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Bicipiti",
+        "Spalle"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Intermedio",
+      "instructions": [
+        "Posiziona un bilanciere incastrato a un'estremità (o usa un apposito supporto T-bar), con un'impugnatura a V applicata vicino al disco.",
+        "Posizionati a cavallo del bilanciere, busto inclinato in avanti, schiena dritta, afferrando l'impugnatura con entrambe le mani.",
+        "Tira il bilanciere verso l'addome, contraendo il dorso e portando i gomiti indietro.",
+        "Scendi con controllo fino alla distensione quasi completa delle braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Permette di caricare molto peso lavorando l'intera schiena: mantieni sempre la colonna in posizione neutra e evita di usare slanci con la parte bassa della schiena.",
+      "images": []
+    },
+    {
+      "id": "seal-row",
+      "name": "Seal Row",
+      "category": "Forza",
+      "muscle_group": "Dorso",
+      "secondary_muscles": [
+        "Bicipiti"
+      ],
+      "equipment": "Bilanciere",
+      "level": "Avanzato",
+      "instructions": [
+        "Sdraiati prono su una panca alta abbastanza da far pendere le braccia liberamente con il bilanciere sotto, mani alla larghezza delle spalle.",
+        "Mantieni il busto completamente appoggiato e fermo: questa è la posizione di partenza.",
+        "Tira il bilanciere verso la panca, contraendo il dorso senza muovere il busto.",
+        "Scendi con controllo fino alla distensione completa delle braccia.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Essendo il busto completamente fissato, questo esercizio elimina qualsiasi compensazione lombare, isolando al massimo i muscoli del dorso. Richiede una panca dedicata o un'attrezzatura adatta.",
+      "images": []
+    },
+    {
+      "id": "front-raise-bilanciere",
+      "name": "Front Raise con Bilanciere",
+      "category": "Isolamento",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [],
+      "equipment": "Bilanciere",
+      "level": "Principiante",
+      "instructions": [
+        "In piedi, afferra il bilanciere con presa prona, mani alla larghezza delle spalle, braccia distese davanti alle cosce.",
+        "Mantenendo le braccia quasi completamente distese, solleva il bilanciere in avanti fino all'altezza delle spalle.",
+        "Mantieni un secondo la posizione in alto, contraendo il deltoide anteriore.",
+        "Scendi con controllo fino alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Isola il deltoide anteriore: evita di usare slanci con la schiena, mantenendo il busto stabile per tutto il movimento.",
+      "images": []
+    },
+    {
+      "id": "reverse-fly-manubri",
+      "name": "Reverse Fly con Manubri",
+      "category": "Isolamento",
+      "muscle_group": "Spalle",
+      "secondary_muscles": [
+        "Dorso"
+      ],
+      "equipment": "Manubri",
+      "level": "Principiante",
+      "instructions": [
+        "In piedi o seduto sul bordo di una panca, inclina il busto in avanti quasi parallelo al pavimento, manubrio per mano sotto le spalle.",
+        "Mantieni una leggera flessione dei gomiti: questa è la posizione di partenza.",
+        "Apri le braccia verso l'esterno e verso l'alto, contraendo le spalle posteriori e la parte alta della schiena.",
+        "Scendi con controllo fino alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Usa carichi leggeri: questo movimento mira al deltoide posteriore, un muscolo piccolo che si affatica facilmente e va allenato con precisione più che con peso elevato.",
+      "images": []
+    },
+    {
+      "id": "hollow-body-hold",
+      "name": "Hollow Body Hold",
+      "category": "Isometrico",
+      "muscle_group": "Addome",
+      "secondary_muscles": [],
+      "equipment": "Corpo libero",
+      "level": "Intermedio",
+      "instructions": [
+        "Sdraiati supino con braccia distese oltre la testa e gambe distese.",
+        "Contraendo l'addome, solleva contemporaneamente braccia, testa, spalle e gambe da terra di alcuni centimetri.",
+        "La parte bassa della schiena deve rimanere premuta contro il pavimento, formando una leggera curva a 'scodella' con il corpo.",
+        "Mantieni la posizione per il tempo previsto, respirando con regolarità.",
+        "Rilascia con controllo tornando alla posizione di partenza."
+      ],
+      "tips": "È un esercizio isometrico molto efficace per il controllo del core: se senti la schiena staccarsi da terra o curvarsi, alza meno le gambe finché non hai sviluppato sufficiente forza addominale.",
+      "images": []
+    },
+    {
+      "id": "toes-to-bar",
+      "name": "Toes to Bar",
+      "category": "Funzionale",
+      "muscle_group": "Addome",
+      "secondary_muscles": [
+        "Dorso"
+      ],
+      "equipment": "Sbarra",
+      "level": "Avanzato",
+      "instructions": [
+        "Afferra la sbarra con presa prona, mani alla larghezza delle spalle, corpo sospeso con le braccia distese.",
+        "Contraendo l'addome e usando un leggero slancio controllato, porta le gambe distese verso l'alto.",
+        "Continua il movimento finché le punte dei piedi non toccano la sbarra.",
+        "Scendi con controllo le gambe fino alla posizione di partenza.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Richiede buona forza di presa, addome e controllo del corpo in sospensione: se è troppo impegnativo, puoi allenarti prima con il 'knees to chest' (ginocchia al petto) come progressione.",
+      "images": []
+    },
+    {
+      "id": "wall-sit",
+      "name": "Wall Sit",
+      "category": "Isometrico",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [],
+      "equipment": "Corpo libero",
+      "level": "Principiante",
+      "instructions": [
+        "Appoggia la schiena a una parete e scendi lungo di essa fino a portare le ginocchia a 90 gradi, come se fossi seduto su una sedia invisibile.",
+        "Mantieni i piedi alla larghezza del bacino, ben piantati a terra.",
+        "Tieni la posizione per il tempo previsto, mantenendo la schiena premuta contro la parete e il core attivo.",
+        "Risali con controllo per terminare l'esercizio."
+      ],
+      "tips": "Esercizio isometrico semplice ma molto efficace per la resistenza dei quadricipiti: se vuoi aumentare la difficoltà, prova a tenere un peso sulle cosce.",
+      "images": []
+    },
+    {
+      "id": "nordic-curl",
+      "name": "Nordic Curl",
+      "category": "Isolamento",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [],
+      "equipment": "Corpo libero",
+      "level": "Avanzato",
+      "instructions": [
+        "In ginocchio, fai assicurare le caviglie a un compagno o sotto un supporto fisso, busto eretto: questa è la posizione di partenza.",
+        "Scendi lentamente in avanti, controllando il movimento con i femorali, mantenendo anche e busto in linea retta.",
+        "Scendi quanto più possibile sotto controllo, usando le mani per attutire l'arrivo a terra se necessario.",
+        "Risali, se possibile, usando la forza dei femorali, oppure spingendo con le mani per aiutarti.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "È uno degli esercizi più efficaci e impegnativi per i femorali in eccentrica: è normale, soprattutto agli inizi, non riuscire a risalire senza l'aiuto delle mani — concentrati sulla discesa controllata.",
+      "images": []
+    },
+    {
+      "id": "reverse-lunge",
+      "name": "Reverse Lunge",
+      "category": "Forza",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [
+        "Glutei"
+      ],
+      "equipment": "Corpo libero",
+      "level": "Principiante",
+      "instructions": [
+        "In piedi, con i piedi alla larghezza del bacino, fai un passo indietro con una gamba.",
+        "Piega entrambe le ginocchia abbassando il bacino, fino a portare il ginocchio posteriore quasi a toccare il pavimento.",
+        "Mantieni il busto eretto e il ginocchio della gamba davanti in linea con la caviglia.",
+        "Spingi con il piede avanti per tornare alla posizione eretta, riportando il piede indietro vicino all'altro.",
+        "Ripeti alternando le gambe per il numero di ripetizioni previsto."
+      ],
+      "tips": "L'affondo all'indietro è generalmente più gentile sulle ginocchia rispetto all'affondo in avanti, perché riduce lo stress sull'articolazione del ginocchio anteriore nella fase di atterraggio.",
+      "images": []
+    },
+    {
+      "id": "curtsy-lunge",
+      "name": "Curtsy Lunge",
+      "category": "Forza",
+      "muscle_group": "Glutei",
+      "secondary_muscles": [
+        "Gambe"
+      ],
+      "equipment": "Corpo libero",
+      "level": "Intermedio",
+      "instructions": [
+        "In piedi, fai un passo indietro e di lato con una gamba, incrociandola dietro l'altra come per un piccolo inchino.",
+        "Piega entrambe le ginocchia abbassando il bacino verso il pavimento, mantenendo il busto eretto.",
+        "Scendi fino a sentire una buona contrazione sul gluteo della gamba d'appoggio.",
+        "Spingi con il piede d'appoggio per risalire, riportando il piede al centro.",
+        "Ripeti alternando le gambe per il numero di ripetizioni previsto."
+      ],
+      "tips": "Il movimento incrociato enfatizza il medio gluteo più di un affondo tradizionale: mantieni il bacino quanto più possibile in linea, senza ruotarlo eccessivamente.",
+      "images": []
+    },
+    {
+      "id": "pistol-squat",
+      "name": "Pistol Squat",
+      "category": "Forza",
+      "muscle_group": "Gambe",
+      "secondary_muscles": [
+        "Glutei",
+        "Addome"
+      ],
+      "equipment": "Corpo libero",
+      "level": "Avanzato",
+      "instructions": [
+        "In piedi su una gamba, estendi l'altra gamba dritta in avanti, braccia distese davanti a te per il bilanciamento.",
+        "Piegando il ginocchio della gamba d'appoggio, scendi in uno squat completo su una sola gamba.",
+        "Mantieni la gamba opposta sempre distesa e sollevata da terra durante tutta la discesa.",
+        "Spingi con il tallone della gamba d'appoggio per risalire fino alla posizione eretta.",
+        "Ripeti per il numero di ripetizioni previsto, poi cambia gamba."
+      ],
+      "tips": "Richiede ottima forza, mobilità di caviglia ed equilibrio: se non riesci ancora a completarlo, puoi allenarti tenendoti a un supporto o lavorando su range parziali per costruire forza progressivamente.",
+      "images": []
+    },
+    {
+      "id": "calf-press-pressa",
+      "name": "Calf Press alla Pressa",
+      "category": "Isolamento",
+      "muscle_group": "Polpacci",
+      "secondary_muscles": [],
+      "equipment": "Macchinario",
+      "level": "Principiante",
+      "instructions": [
+        "Siediti sulla leg press con le gambe quasi completamente distese, appoggiando solo la punta dei piedi sulla piattaforma.",
+        "Mantieni le ginocchia leggermente piegate ma ferme per tutto l'esercizio: questa è la posizione di partenza.",
+        "Spingi la piattaforma estendendo le caviglie, sollevando i talloni il più possibile.",
+        "Torna con controllo alla posizione di partenza, sentendo un buono stretch sui polpacci.",
+        "Ripeti per il numero di ripetizioni previsto."
+      ],
+      "tips": "Permette di caricare un peso elevato sui polpacci in sicurezza: mantieni le ginocchia ferme durante tutto il movimento, il lavoro deve venire solo dalla caviglia.",
+      "images": []
     }
   ],
   "groups": [

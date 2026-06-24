@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -12,7 +12,7 @@ import {
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 
 import { colors, radius, spacing, typography } from "@/src/theme";
 import {
@@ -38,7 +38,7 @@ export default function LibraryScreen() {
       .catch(() => setGroups([]));
   }, []);
 
-  useEffect(() => {
+  const loadExercises = useCallback(() => {
     let cancelled = false;
     setLoading(true);
     setError(null);
@@ -50,6 +50,20 @@ export default function LibraryScreen() {
       cancelled = true;
     };
   }, [muscle]);
+
+  useEffect(() => {
+    const cancel = loadExercises();
+    return cancel;
+  }, [loadExercises]);
+
+  // Re-fetch whenever the screen regains focus, so newly imported/added
+  // exercises (saved from the add-exercise screen) show up immediately.
+  useFocusEffect(
+    useCallback(() => {
+      const cancel = loadExercises();
+      return cancel;
+    }, [loadExercises]),
+  );
 
   const filtered = useMemo(() => {
     if (!query.trim()) return items;
@@ -65,8 +79,18 @@ export default function LibraryScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={["top"]} testID="library-screen">
       <View style={styles.header}>
-        <Text style={styles.title}>Libreria</Text>
-        <Text style={styles.subtitle}>{items.length} esercizi disponibili</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>Libreria</Text>
+          <Text style={styles.subtitle}>{items.length} esercizi disponibili</Text>
+        </View>
+        <Pressable
+          onPress={() => router.push("/picker/add-exercise" as any)}
+          style={styles.addBtn}
+          hitSlop={8}
+          testID="add-exercise-btn"
+        >
+          <Ionicons name="add" size={24} color={colors.onBrandPrimary} />
+        </Pressable>
       </View>
 
       <View style={styles.searchWrap}>
@@ -183,7 +207,23 @@ export function ExerciseRow({
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.surface },
-  header: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
+  header: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: spacing.md,
+  },
+  addBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.brandPrimary,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 2,
+  },
   title: {
     color: colors.onSurface,
     fontSize: typography.sizes.xxxl,

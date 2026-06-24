@@ -8,6 +8,7 @@ const K = {
   workouts: "wt_workouts_v1",
   history: "wt_history_v1",
   prefs: "wt_prefs_v1",
+  customExercises: "wt_custom_exercises_v1",
 };
 
 export type ExerciseEntry = {
@@ -55,6 +56,21 @@ export type HistoryEntry = {
   totalVolume: number; // kg lifted
   totalSets: number;
   exercises: SessionExerciseLog[];
+};
+
+export type CustomExercise = {
+  id: string;
+  name: string;
+  category: string;
+  muscle_group: string;
+  secondary_muscles: string[];
+  equipment: string;
+  level: string;
+  instructions: string[];
+  tips: string;
+  images: string[];
+  source: "free-exercise-db" | "manual";
+  createdAt: string;
 };
 
 export type Prefs = {
@@ -136,4 +152,27 @@ export async function savePrefs(p: Prefs): Promise<void> {
 
 export function uid(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+// ------- Custom Exercises (user-added, merged with bundled database) -------
+export async function getCustomExercises(): Promise<CustomExercise[]> {
+  return readJSON<CustomExercise[]>(K.customExercises, []);
+}
+export async function saveCustomExercise(e: CustomExercise): Promise<void> {
+  const list = await getCustomExercises();
+  // Replace if an exercise with the same id already exists (e.g. re-import/edit)
+  const filtered = list.filter((x) => x.id !== e.id);
+  filtered.unshift(e);
+  await writeJSON(K.customExercises, filtered);
+}
+export async function deleteCustomExercise(id: string): Promise<void> {
+  const list = await getCustomExercises();
+  await writeJSON(
+    K.customExercises,
+    list.filter((x) => x.id !== id),
+  );
+}
+export async function isCustomExerciseIdTaken(id: string): Promise<boolean> {
+  const list = await getCustomExercises();
+  return list.some((x) => x.id === id);
 }

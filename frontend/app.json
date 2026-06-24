@@ -14,10 +14,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#000"
+        "backgroundColor": "#000000"
       },
-      "edgeToEdgeEnabled": true,
-      "package": "com.dammat.frontend"
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
@@ -29,22 +28,16 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/splash-image.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#000"
+          "backgroundColor": "#000000"
         }
       ],
       "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "a4d53bb1-21cf-49c5-aa96-17733a2cc205"
-      }
     }
   }
 }

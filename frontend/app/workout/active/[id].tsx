@@ -14,10 +14,6 @@ import { Image } from "expo-image";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
-import { useAudioPlayer, setAudioModeAsync } from "expo-audio";
-
-const countdownBeep = require("@/assets/sounds/countdown_beep.wav");
-const restCompleteChime = require("@/assets/sounds/rest_complete.wav");
 
 import { colors, radius, spacing, typography } from "@/src/theme";
 import {
@@ -54,8 +50,6 @@ export default function ActiveWorkoutScreen() {
   const [rest, setRest] = useState<RestState>({ active: false, remaining: 0, total: 0, label: "" });
   const [confirmEnd, setConfirmEnd] = useState(false);
   const startTimeRef = useRef<number>(Date.now());
-  const beepPlayer = useAudioPlayer(countdownBeep);
-  const chimePlayer = useAudioPlayer(restCompleteChime);
 
   useEffect(() => {
     if (!id) return;
@@ -79,7 +73,6 @@ export default function ActiveWorkoutScreen() {
 
   // Elapsed timer
   useEffect(() => {
-    setAudioModeAsync({ playsInSilentMode: true });
     const i = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
     }, 1000);
@@ -94,14 +87,10 @@ export default function ActiveWorkoutScreen() {
         if (!r.active) return r;
         if (r.remaining <= 1) {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-          chimePlayer.seekTo(0);
-          chimePlayer.play();
           return { ...r, active: false, remaining: 0 };
         }
         if (r.remaining <= 4 && r.remaining > 1) {
           Haptics.selectionAsync();
-          beepPlayer.seekTo(0);
-          beepPlayer.play();
         }
         return { ...r, remaining: r.remaining - 1 };
       });

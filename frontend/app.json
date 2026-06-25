@@ -16,12 +16,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "edgeToEdgeEnabled": true,
-      "permissions": [
-        "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS"
-      ],
-      "package": "com.dammat.frontend"
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
@@ -39,17 +34,10 @@
           "backgroundColor": "#000000"
         }
       ],
-      "expo-font",
-      "expo-audio"
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "a4d53bb1-21cf-49c5-aa96-17733a2cc205"
-      }
     }
   }
 }

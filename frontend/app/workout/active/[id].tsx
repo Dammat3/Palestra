@@ -14,6 +14,7 @@ import { Image } from "expo-image";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
+import { Audio } from "expo-av";
 
 import { colors, radius, spacing, typography } from "@/src/theme";
 import {
@@ -26,6 +27,9 @@ import {
   uid,
 } from "@/src/storage";
 import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
+
+const countdownBeep = require("@/assets/sounds/countdown_beep.wav");
+const restCompleteChime = require("@/assets/sounds/rest_complete.wav");
 
 function fmtSec(total: number) {
   const m = Math.floor(total / 60);
@@ -50,6 +54,8 @@ export default function ActiveWorkoutScreen() {
   const [rest, setRest] = useState<RestState>({ active: false, remaining: 0, total: 0, label: "" });
   const [confirmEnd, setConfirmEnd] = useState(false);
   const startTimeRef = useRef<number>(Date.now());
+  const beepSoundRef = useRef<Audio.Sound | null>(null);
+  const chimeSoundRef = useRef<Audio.Sound | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -71,12 +77,33 @@ export default function ActiveWorkoutScreen() {
     });
   }, [id]);
 
-  // Elapsed timer
+  // Elapsed timer + sound setup
   useEffect(() => {
+    Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: false,
+      shouldDuckAndroid: true,
+    }).catch(() => {});
+
+    Audio.Sound.createAsync(countdownBeep)
+      .then(({ sound }) => {
+        beepSoundRef.current = sound;
+      })
+      .catch(() => {});
+    Audio.Sound.createAsync(restCompleteChime)
+      .then(({ sound }) => {
+        chimeSoundRef.current = sound;
+      })
+      .catch(() => {});
+
     const i = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
     }, 1000);
-    return () => clearInterval(i);
+    return () => {
+      clearInterval(i);
+      beepSoundRef.current?.unloadAsync().catch(() => {});
+      chimeSoundRef.current?.unloadAsync().catch(() => {});
+    };
   }, []);
 
   // Rest countdown
@@ -87,10 +114,12 @@ export default function ActiveWorkoutScreen() {
         if (!r.active) return r;
         if (r.remaining <= 1) {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          chimeSoundRef.current?.replayAsync().catch(() => {});
           return { ...r, active: false, remaining: 0 };
         }
         if (r.remaining <= 4 && r.remaining > 1) {
           Haptics.selectionAsync();
+          beepSoundRef.current?.replayAsync().catch(() => {});
         }
         return { ...r, remaining: r.remaining - 1 };
       });

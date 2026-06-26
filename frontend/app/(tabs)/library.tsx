@@ -84,6 +84,14 @@ export default function LibraryScreen() {
           <Text style={styles.subtitle}>{items.length} esercizi disponibili</Text>
         </View>
         <Pressable
+          onPress={() => router.push("/picker/backup" as any)}
+          style={styles.backupBtn}
+          hitSlop={8}
+          testID="backup-btn"
+        >
+          <Ionicons name="cloud-outline" size={20} color={colors.onSurface} />
+        </Pressable>
+        <Pressable
           onPress={() => router.push("/picker/add-exercise" as any)}
           style={styles.addBtn}
           hitSlop={8}
@@ -214,6 +222,17 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     gap: spacing.md,
+  },
+  backupBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.surfaceSecondary,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 2,
   },
   addBtn: {
     width: 36,

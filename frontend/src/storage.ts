@@ -154,6 +154,82 @@ export function uid(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
+// ------- Backup / Restore (export & import full app data) -------
+export type BackupPayload = {
+  appName: "Palestra";
+  backupVersion: 1;
+  exportedAt: string;
+  data: {
+    workouts: Workout[];
+    history: HistoryEntry[];
+    prefs: Prefs | null;
+    customExercises: CustomExercise[];
+  };
+};
+
+export async function exportAllData(): Promise<BackupPayload> {
+  const [workouts, history, prefs, customExercises] = await Promise.all([
+    readJSON<Workout[]>(K.workouts, []),
+    readJSON<HistoryEntry[]>(K.history, []),
+    readJSON<Prefs | null>(K.prefs, null),
+    readJSON<CustomExercise[]>(K.customExercises, []),
+  ]);
+  return {
+    appName: "Palestra",
+    backupVersion: 1,
+    exportedAt: new Date().toISOString(),
+    data: { workouts, history, prefs, customExercises },
+  };
+}
+
+/**
+ * Restores data from a backup. By default merges with existing data
+ * (workouts/history/customExercises are deduplicated by id, existing
+ * entries win on conflict); pass replace=true to wipe and overwrite instead.
+ */
+export async function importAllData(
+  backup: BackupPayload,
+  options: { replace?: boolean } = {},
+): Promise<{ workouts: number; history: number; customExercises: number }> {
+  if (backup?.appName !== "Palestra" || !backup?.data) {
+    throw new Error("File di backup non valido.");
+  }
+  const { workouts, history, prefs, customExercises } = backup.data;
+
+  if (options.replace) {
+    await writeJSON(K.workouts, workouts || []);
+    await writeJSON(K.history, history || []);
+    await writeJSON(K.customExercises, customExercises || []);
+    if (prefs) await writeJSON(K.prefs, prefs);
+  } else {
+    const existingWorkouts = await readJSON<Workout[]>(K.workouts, []);
+    const existingHistory = await readJSON<HistoryEntry[]>(K.history, []);
+    const existingCustom = await readJSON<CustomExercise[]>(K.customExercises, []);
+
+    const mergedWorkouts = dedupeById(existingWorkouts, workouts || []);
+    const mergedHistory = dedupeById(existingHistory, history || []);
+    const mergedCustom = dedupeById(existingCustom, customExercises || []);
+
+    await writeJSON(K.workouts, mergedWorkouts);
+    await writeJSON(K.history, mergedHistory);
+    await writeJSON(K.customExercises, mergedCustom);
+  }
+
+  return {
+    workouts: (workouts || []).length,
+    history: (history || []).length,
+    customExercises: (customExercises || []).length,
+  };
+}
+
+function dedupeById<T extends { id: string }>(existing: T[], incoming: T[]): T[] {
+  const byId = new Map(existing.map((x) => [x.id, x]));
+  for (const item of incoming) {
+    if (!byId.has(item.id)) byId.set(item.id, item);
+  }
+  return Array.from(byId.values());
+}
+
 // ------- Custom Exercises (user-added, merged with bundled database) -------
 export async function getCustomExercises(): Promise<CustomExercise[]> {
   return readJSON<CustomExercise[]>(K.customExercises, []);

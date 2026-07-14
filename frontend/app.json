@@ -17,6 +17,7 @@
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
+      "softwareKeyboardLayoutMode": "pan",
       "package": "com.dammat.frontend"
     },
     "web": {
@@ -35,16 +36,18 @@
           "backgroundColor": "#000000"
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Consenti a Palestra di accedere alle tue foto per salvare le immagini dei progressi.",
+          "cameraPermission": "Consenti a Palestra di usare la fotocamera per scattare foto dei tuoi progressi.",
+          "microphonePermission": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "a4d53bb1-21cf-49c5-aa96-17733a2cc205"
-      }
     }
   }
 }

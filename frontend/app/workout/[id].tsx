@@ -23,7 +23,6 @@ import {
   getWorkout,
   saveWorkout,
 } from "@/src/storage";
-import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
 
 export default function WorkoutEditScreen() {
   const router = useRouter();
@@ -141,7 +140,7 @@ export default function WorkoutEditScreen() {
         <ScrollView
           contentContainerStyle={{
             padding: spacing.lg,
-            paddingBottom: 120 + insets.bottom,
+            paddingBottom: 320 + insets.bottom,
           }}
           keyboardShouldPersistTaps="handled"
         >
@@ -254,26 +253,27 @@ function ExerciseEditCard({
     const n = parseFloat(v.replace(",", "."));
     return Number.isFinite(n) ? n : 0;
   };
+  const router = useRouter();
   return (
     <View style={[styles.exCard, isSuperset && styles.exCardSuperset]}>
       <View style={styles.exCardTop}>
-        <View style={styles.exThumb}>
-          {ex.images && ex.images.length > 0 ? (
-            <AnimatedExerciseImage
-              images={ex.images}
-              style={{ width: "100%", height: "100%" }}
-              contentFit="cover"
-            />
-          ) : ex.image ? (
-            <Image source={{ uri: ex.image }} style={{ width: "100%", height: "100%" }} contentFit="cover" />
-          ) : (
-            <Ionicons name="barbell" size={20} color={colors.onSurfaceTertiary} />
-          )}
-        </View>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.exName} numberOfLines={2}>{ex.exerciseName}</Text>
-          <Text style={styles.exMuscle}>{ex.muscleGroup}</Text>
-        </View>
+        <Pressable
+          style={{ flexDirection: "row", flex: 1, gap: spacing.sm }}
+          onPress={() => router.push(`/exercise/${ex.exerciseId}` as any)}
+          testID={`open-exercise-detail-${ex.exerciseId}`}
+        >
+          <View style={styles.exThumb}>
+            {ex.image ? (
+              <Image source={{ uri: ex.image }} style={{ width: "100%", height: "100%" }} contentFit="cover" />
+            ) : (
+              <Ionicons name="barbell" size={20} color={colors.onSurfaceTertiary} />
+            )}
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.exName} numberOfLines={2}>{ex.exerciseName}</Text>
+            <Text style={styles.exMuscle}>{ex.muscleGroup}</Text>
+          </View>
+        </Pressable>
         <View style={styles.exActions}>
           {onToggleSuperset && (
             <Pressable
@@ -323,12 +323,14 @@ function ExerciseEditCard({
           onChange={(v) => onChange({ targetReps: Math.max(0, Math.round(num(v))) })}
           testID={`field-reps-${ex.exerciseId}`}
         />
-        <Field
-          label="Peso (kg)"
-          value={String(ex.targetWeight)}
-          onChange={(v) => onChange({ targetWeight: Math.max(0, num(v)) })}
-          testID={`field-weight-${ex.exerciseId}`}
-        />
+        {!ex.bodyweight && (
+          <Field
+            label="Peso (kg)"
+            value={String(ex.targetWeight)}
+            onChange={(v) => onChange({ targetWeight: Math.max(0, num(v)) })}
+            testID={`field-weight-${ex.exerciseId}`}
+          />
+        )}
         <Field
           label="Pausa (s)"
           value={String(ex.restSeconds)}
@@ -336,6 +338,21 @@ function ExerciseEditCard({
           testID={`field-rest-${ex.exerciseId}`}
         />
       </View>
+
+      <Pressable
+        onPress={() => onChange({ bodyweight: !ex.bodyweight, targetWeight: 0 })}
+        style={[styles.bodyweightToggle, ex.bodyweight && styles.bodyweightToggleActive]}
+        testID={`toggle-bodyweight-${ex.exerciseId}`}
+      >
+        <Ionicons
+          name={ex.bodyweight ? "checkmark-circle" : "ellipse-outline"}
+          size={16}
+          color={ex.bodyweight ? colors.brandPrimary : colors.onSurfaceTertiary}
+        />
+        <Text style={[styles.bodyweightToggleText, ex.bodyweight && { color: colors.brandPrimary }]}>
+          Solo ripetizioni (corpo libero / AMRAP)
+        </Text>
+      </Pressable>
     </View>
   );
 }
@@ -496,4 +513,26 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   startText: { color: colors.onBrandPrimary, fontWeight: "800", fontSize: typography.sizes.base, letterSpacing: 0.3 },
+  bodyweightToggle: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.surfaceTertiary,
+    marginTop: spacing.sm,
+  },
+  bodyweightToggleActive: {
+    borderColor: colors.brandPrimary,
+    backgroundColor: colors.brandTertiary,
+  },
+  bodyweightToggleText: {
+    color: colors.onSurfaceTertiary,
+    fontSize: 13,
+    fontWeight: "600",
+    flex: 1,
+  },
 });

@@ -6,6 +6,7 @@ import { useFocusEffect } from "expo-router";
 
 import { colors, radius, spacing, typography } from "@/src/theme";
 import { HistoryEntry, getHistory } from "@/src/storage";
+import { WorkoutCalendar, toLocalDateKey } from "@/src/components/WorkoutCalendar";
 
 export default function ProgressScreen() {
   const insets = useSafeAreaInsets();
@@ -83,6 +84,38 @@ export default function ProgressScreen() {
       .sort((a, b) => b.estimated - a.estimated)
       .slice(0, 5);
 
+    // streak: consecutive days with at least one finished workout
+    const workoutDays = new Set(history.map((h) => h.finishedAt.slice(0, 10)));
+    let currentStreak = 0;
+    const cursor = new Date(today);
+    // if no workout today yet, start counting from yesterday so the streak
+    // doesn't reset to 0 before the day is even over
+    if (!workoutDays.has(cursor.toISOString().slice(0, 10))) {
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    while (workoutDays.has(cursor.toISOString().slice(0, 10))) {
+      currentStreak += 1;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+
+    let bestStreak = 0;
+    if (workoutDays.size > 0) {
+      const sortedDays = Array.from(workoutDays).sort();
+      let run = 1;
+      bestStreak = 1;
+      for (let i = 1; i < sortedDays.length; i++) {
+        const prev = new Date(sortedDays[i - 1]);
+        const cur = new Date(sortedDays[i]);
+        const diffDays = Math.round((cur.getTime() - prev.getTime()) / 86400000);
+        if (diffDays === 1) {
+          run += 1;
+        } else {
+          run = 1;
+        }
+        bestStreak = Math.max(bestStreak, run);
+      }
+    }
+
     return {
       totalWorkouts,
       totalVolume,
@@ -92,8 +125,15 @@ export default function ProgressScreen() {
       maxVal,
       topExercises,
       top1RM,
+      currentStreak,
+      bestStreak,
     };
   }, [history]);
+
+	const workoutDates = useMemo(
+	  () => new Set(history.map((h) => toLocalDateKey(h.finishedAt))),
+	  [history],
+	);
 
   return (
     <SafeAreaView style={styles.safe} edges={["top"]} testID="progress-screen">
@@ -114,6 +154,34 @@ export default function ProgressScreen() {
           </View>
         ) : (
           <>
+            <View style={styles.streakCard}>
+              <View style={styles.streakIconWrap}>
+                <Ionicons
+                  name="flame"
+                  size={28}
+                  color={stats.currentStreak > 0 ? "#FF8A3D" : colors.onSurfaceTertiary}
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.streakValue}>
+                  {stats.currentStreak} {stats.currentStreak === 1 ? "giorno" : "giorni"} di fila
+                </Text>
+                <Text style={styles.streakSubtitle}>
+                  {stats.currentStreak > 0
+                    ? "Continua così, non rompere la catena!"
+                    : "Allenati oggi per iniziare una nuova streak"}
+                </Text>
+              </View>
+              {stats.bestStreak > stats.currentStreak && (
+                <View style={styles.streakBest}>
+                  <Text style={styles.streakBestValue}>{stats.bestStreak}</Text>
+                  <Text style={styles.streakBestLabel}>record</Text>
+                </View>
+              )}
+            </View>
+
+            <WorkoutCalendar workoutDates={workoutDates} />
+
             <View style={styles.statsGrid}>
               <StatCard label="Allenamenti" value={String(stats.totalWorkouts)} icon="flame" />
               <StatCard
@@ -237,6 +305,48 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xl,
   },
   statsGrid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
+  streakCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.surfaceSecondary,
+    borderRadius: radius.md,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    gap: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  streakIconWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: radius.md,
+    backgroundColor: colors.surfaceTertiary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  streakValue: {
+    color: colors.onSurface,
+    fontSize: typography.sizes.lg,
+    fontWeight: "800",
+    letterSpacing: -0.3,
+  },
+  streakSubtitle: {
+    color: colors.onSurfaceSecondary,
+    fontSize: typography.sizes.sm,
+    marginTop: 2,
+  },
+  streakBest: { alignItems: "center", paddingLeft: spacing.sm },
+  streakBestValue: {
+    color: colors.brandPrimary,
+    fontSize: typography.sizes.lg,
+    fontWeight: "800",
+  },
+  streakBestLabel: {
+    color: colors.onSurfaceTertiary,
+    fontSize: typography.sizes.xs,
+    textTransform: "uppercase",
+    fontWeight: "600",
+  },
   statCard: {
     flexBasis: "48%",
     flexGrow: 1,

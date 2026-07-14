@@ -64,6 +64,24 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="measurements"
+        options={{
+          title: "Misure",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="body-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="gallery"
+        options={{
+          title: "Foto",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="images-outline" color={color} size={size} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -22,11 +22,14 @@ import {
   SessionExerciseLog,
   SetLog,
   Workout,
+  getHistory,
   getWorkout,
   saveHistory,
   uid,
 } from "@/src/storage";
 import { AnimatedExerciseImage } from "@/src/components/AnimatedExerciseImage";
+import { buildPRBaseline, checkSetForPR, PRBaseline } from "@/src/personalRecords";
+import { setPickerCallback, clearPickerCallback } from "@/src/exercisePicker";
 
 const countdownBeep = require("@/assets/sounds/countdown_beep.wav");
 const restCompleteChime = require("@/assets/sounds/rest_complete.wav");
@@ -56,6 +59,15 @@ export default function ActiveWorkoutScreen() {
   const startTimeRef = useRef<number>(Date.now());
   const beepSoundRef = useRef<Audio.Sound | null>(null);
   const chimeSoundRef = useRef<Audio.Sound | null>(null);
+  const [prBaseline, setPrBaseline] = useState<PRBaseline>({ weighted: {}, bodyweight: {} });
+  const [prToast, setPrToast] = useState<{ exerciseName: string } | null>(null);
+  const [sessionPRs, setSessionPRs] = useState<
+    { exerciseId: string; exerciseName: string; estimated: number; isBodyweight?: boolean }[]
+  >([]);
+
+  useEffect(() => {
+    getHistory().then((h) => setPrBaseline(buildPRBaseline(h)));
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -117,7 +129,7 @@ export default function ActiveWorkoutScreen() {
           chimeSoundRef.current?.replayAsync().catch(() => {});
           return { ...r, active: false, remaining: 0 };
         }
-        if (r.remaining <= 4 && r.remaining > 1) {
+        if (r.remaining <= 6 && r.remaining > 1) {
           Haptics.selectionAsync();
           beepSoundRef.current?.replayAsync().catch(() => {});
         }
@@ -168,13 +180,87 @@ export default function ActiveWorkoutScreen() {
     );
   };
 
+  const removeSet = (exIdx: number) => {
+    if (logs[exIdx].sets.length <= 1) return;
+    Haptics.selectionAsync();
+    setLogs((ls) =>
+      ls.map((ex, i) => {
+        if (i !== exIdx) return ex;
+        return { ...ex, sets: ex.sets.slice(0, -1) };
+      }),
+    );
+  };
+
+  const addExerciseMidWorkout = () => {
+    if (!w) return;
+    Haptics.selectionAsync();
+    setPickerCallback((exercise) => {
+      const prefs = w.exercises[0];
+      const newLog: SessionExerciseLog = {
+        exerciseId: exercise.id,
+        exerciseName: exercise.name,
+        muscleGroup: exercise.muscleGroup,
+        sets: [{ reps: prefs?.targetReps || 10, weight: 0, done: false }],
+      };
+      setLogs((prev) => [...prev, newLog]);
+      setW((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          exercises: [
+            ...prev.exercises,
+            {
+              exerciseId: exercise.id,
+              exerciseName: exercise.name,
+              muscleGroup: exercise.muscleGroup,
+              image: exercise.image,
+              images: exercise.images,
+              targetSets: 1,
+              targetReps: prefs?.targetReps || 10,
+              targetWeight: 0,
+              restSeconds: prefs?.restSeconds || 90,
+            },
+          ],
+        };
+      });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    });
+    router.push("/picker/exercises" as any);
+  };
+
   const completeSet = (exIdx: number, setIdx: number) => {
     const set = logs[exIdx].sets[setIdx];
     const wasDone = set.done;
     updateSet(exIdx, setIdx, { done: !wasDone });
     if (!wasDone) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       const ex = w.exercises[exIdx];
+
+      // Check for a new personal record on this set
+      const prResult = checkSetForPR(ex.exerciseId, set.weight, set.reps, prBaseline);
+      if (prResult !== null) {
+        // Update baseline so subsequent sets in this session compare against the new best
+        setPrBaseline((prev) => {
+          if (prResult.isBodyweight) {
+            return { ...prev, bodyweight: { ...prev.bodyweight, [ex.exerciseId]: prResult.value } };
+          }
+          return { ...prev, weighted: { ...prev.weighted, [ex.exerciseId]: prResult.value } };
+        });
+        setSessionPRs((prev) => {
+          const withoutDuplicate = prev.filter((p) => p.exerciseId !== ex.exerciseId);
+          return [...withoutDuplicate, {
+            exerciseId: ex.exerciseId,
+            exerciseName: ex.exerciseName,
+            estimated: prResult.value,
+            isBodyweight: prResult.isBodyweight,
+          }];
+        });
+        setPrToast({ exerciseName: ex.exerciseName });
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        setTimeout(() => setPrToast(null), 3000);
+      } else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }
+
       const isLastSetOfEx = setIdx === logs[exIdx].sets.length - 1;
 
       // Superset behavior: if this exercise is part of a superset group,
@@ -233,11 +319,29 @@ export default function ActiveWorkoutScreen() {
     };
     await saveHistory(entry);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    router.replace("/(tabs)/history" as any);
+    router.replace({
+      pathname: "/workout/summary" as any,
+      params: {
+        workoutName: w.name,
+        durationSec: String(durationSec),
+        totalVolume: String(totals.vol),
+        totalSets: String(totals.setsDone),
+        prs: JSON.stringify(sessionPRs),
+      },
+    });
   };
 
   return (
     <SafeAreaView style={styles.safe} edges={["top"]} testID="active-workout-screen">
+      {prToast && (
+        <View style={styles.prToast} testID="pr-toast">
+          <Ionicons name="trophy" size={18} color="#FFD700" />
+          <View style={{ flex: 1 }}>
+            <Text style={styles.prToastTitle}>Nuovo record personale!</Text>
+            <Text style={styles.prToastSubtitle} numberOfLines={1}>{prToast.exerciseName}</Text>
+          </View>
+        </View>
+      )}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={{ flex: 1 }}
@@ -291,7 +395,11 @@ export default function ActiveWorkoutScreen() {
                   </View>
                 )}
                 <View style={[styles.exBlock, isSuperset && styles.exBlockSuperset]}>
-                  <View style={styles.exHead}>
+                  <Pressable
+                    style={styles.exHead}
+                    onPress={() => router.push(`/exercise/${ex.exerciseId}` as any)}
+                    testID={`open-exercise-${ex.exerciseId}`}
+                  >
                     {meta?.images && meta.images.length > 0 ? (
                       <AnimatedExerciseImage
                         images={meta.images}
@@ -308,15 +416,18 @@ export default function ActiveWorkoutScreen() {
                     <View style={{ flex: 1 }}>
                       <Text style={styles.exTitle}>{ex.exerciseName}</Text>
                       <Text style={styles.exSub}>
-                        {ex.muscleGroup} · {meta?.targetSets || ex.sets.length}x{meta?.targetReps || "?"} · Pausa {meta?.restSeconds}s
+                        {ex.muscleGroup} · {meta?.targetSets || ex.sets.length}x{meta?.targetReps || "?"} · {meta?.bodyweight ? "Corpo libero" : `Pausa ${meta?.restSeconds}s`}
                       </Text>
                     </View>
-                  </View>
+                    <Ionicons name="information-circle-outline" size={18} color={colors.onSurfaceTertiary} />
+                  </Pressable>
 
                 <View style={styles.setHeader}>
                   <Text style={[styles.setHeaderText, { width: 28 }]}>#</Text>
                   <Text style={[styles.setHeaderText, { flex: 1 }]}>RIP</Text>
-                  <Text style={[styles.setHeaderText, { flex: 1 }]}>KG</Text>
+                  {!meta?.bodyweight && (
+                    <Text style={[styles.setHeaderText, { flex: 1 }]}>KG</Text>
+                  )}
                   <Text style={[styles.setHeaderText, { width: 44, textAlign: "right" }]}>OK</Text>
                 </View>
 
@@ -336,16 +447,18 @@ export default function ActiveWorkoutScreen() {
                       style={styles.setInput}
                       testID={`set-reps-${exIdx}-${sIdx}`}
                     />
-                    <TextInput
-                      value={String(s.weight)}
-                      onChangeText={(v) =>
-                        updateSet(exIdx, sIdx, { weight: parseFloat(v.replace(",", ".")) || 0 })
-                      }
-                      keyboardType="decimal-pad"
-                      selectTextOnFocus
-                      style={styles.setInput}
-                      testID={`set-weight-${exIdx}-${sIdx}`}
-                    />
+                    {!meta?.bodyweight && (
+                      <TextInput
+                        value={String(s.weight)}
+                        onChangeText={(v) =>
+                          updateSet(exIdx, sIdx, { weight: parseFloat(v.replace(",", ".")) || 0 })
+                        }
+                        keyboardType="decimal-pad"
+                        selectTextOnFocus
+                        style={styles.setInput}
+                        testID={`set-weight-${exIdx}-${sIdx}`}
+                      />
+                    )}
                     <Pressable
                       onPress={() => completeSet(exIdx, sIdx)}
                       style={[styles.checkBtn, s.done && styles.checkBtnDone]}
@@ -360,18 +473,39 @@ export default function ActiveWorkoutScreen() {
                   </View>
                 ))}
 
-                <Pressable
-                  onPress={() => addSet(exIdx)}
-                  style={styles.addSetBtn}
-                  testID={`add-set-${exIdx}`}
-                >
-                  <Ionicons name="add" size={16} color={colors.brandPrimary} />
-                  <Text style={styles.addSetText}>Aggiungi serie</Text>
-                </Pressable>
+                <View style={styles.setActionRow}>
+                  <Pressable
+                    onPress={() => removeSet(exIdx)}
+                    disabled={logs[exIdx].sets.length <= 1}
+                    style={[styles.setActionBtn, styles.setActionBtnRemove, logs[exIdx].sets.length <= 1 && { opacity: 0.35 }]}
+                    testID={`remove-set-${exIdx}`}
+                  >
+                    <Ionicons name="remove" size={15} color={colors.onSurfaceSecondary} />
+                    <Text style={styles.setActionBtnText}>Rimuovi</Text>
+                  </Pressable>
+                  <Pressable
+                    onPress={() => addSet(exIdx)}
+                    style={[styles.setActionBtn, styles.setActionBtnAdd]}
+                    testID={`add-set-${exIdx}`}
+                  >
+                    <Ionicons name="add" size={15} color={colors.brandPrimary} />
+                    <Text style={[styles.setActionBtnText, { color: colors.brandPrimary }]}>Aggiungi</Text>
+                  </Pressable>
+                </View>
               </View>
               </View>
             );
           })}
+
+          {/* Add exercise mid-workout button */}
+          <Pressable
+            onPress={addExerciseMidWorkout}
+            style={styles.addExerciseBtn}
+            testID="add-exercise-mid-workout-btn"
+          >
+            <Ionicons name="add-circle-outline" size={18} color={colors.onSurfaceSecondary} />
+            <Text style={styles.addExerciseBtnText}>Aggiungi esercizio</Text>
+          </Pressable>
         </ScrollView>
 
         {rest.active && (
@@ -448,6 +582,29 @@ export default function ActiveWorkoutScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.surface },
+  prToast: {
+    position: "absolute",
+    top: 8,
+    left: spacing.lg,
+    right: spacing.lg,
+    zIndex: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    backgroundColor: colors.surfaceTertiary,
+    borderWidth: 1,
+    borderColor: "#FFD700",
+    borderRadius: radius.md,
+    paddingVertical: 10,
+    paddingHorizontal: spacing.md,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+  },
+  prToastTitle: { color: colors.onSurface, fontWeight: "800", fontSize: 13 },
+  prToastSubtitle: { color: colors.onSurfaceSecondary, fontSize: 12, marginTop: 1 },
   topBar: {
     flexDirection: "row",
     alignItems: "center",
@@ -537,6 +694,34 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
   },
   addSetText: { color: colors.brandPrimary, fontWeight: "700", fontSize: typography.sizes.sm },
+  setActionRow: {
+    flexDirection: "row",
+    gap: spacing.sm,
+    marginTop: spacing.sm,
+  },
+  setActionBtn: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 4,
+    paddingVertical: 9,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+  },
+  setActionBtnRemove: {
+    borderColor: colors.border,
+    backgroundColor: colors.surfaceTertiary,
+  },
+  setActionBtnAdd: {
+    borderColor: colors.brandSecondary,
+    backgroundColor: colors.brandTertiary,
+  },
+  setActionBtnText: {
+    color: colors.onSurfaceSecondary,
+    fontSize: 13,
+    fontWeight: "600",
+  },
   restPanel: {
     position: "absolute",
     left: 0,
@@ -577,4 +762,24 @@ const styles = StyleSheet.create({
   modalBtnSecondary: { backgroundColor: colors.surfaceTertiary },
   modalBtnPrimary: { backgroundColor: colors.brandPrimary },
   modalBtnText: { color: colors.onSurface, fontWeight: "700" },
+  addExerciseBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: spacing.sm,
+    marginHorizontal: spacing.lg,
+    marginTop: spacing.md,
+    marginBottom: spacing.sm,
+    paddingVertical: 12,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderStyle: "dashed",
+    backgroundColor: colors.surfaceSecondary,
+  },
+  addExerciseBtnText: {
+    color: colors.onSurfaceSecondary,
+    fontWeight: "600",
+    fontSize: typography.sizes.sm,
+  },
 });
